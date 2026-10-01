@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paparuga: Pueblo Gitano</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --rojo:#C41E3A;--dorado:#D4A017;--azul:#1B4F72;
+  --crema:#FFF8F0;--marron:#6B3A2A;--morado:#7D3C98;
+  --texto:#2C1810;--verde:#27AE60;
+}
+body{font-family:Georgia,serif;background:var(--crema);color:var(--texto)}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.1);padding:12px 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:8px;font-weight:bold;color:var(--rojo);font-size:1rem}
+.nav-links{display:flex;gap:5px;list-style:none;flex-wrap:wrap}
+.nav-links a{text-decoration:none;color:var(--texto);font-size:.85rem;padding:6px 12px;border-radius:20px;transition:all .3s}
+.nav-links a:hover,.nav-links a.active{background:var(--rojo);color:#fff}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(rgba(80,10,20,.55),rgba(80,10,20,.55)),url('hero-fondo.jpeg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:80px 20px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.03) 40px,rgba(255,255,255,.03) 80px)}
+.hero-butterfly{font-size:5rem;animation:float 3s ease-in-out infinite;margin-bottom:20px}
+.hero h1{font-size:clamp(2rem,5vw,4rem);text-shadow:2px 2px 10px rgba(0,0,0,.5);margin-bottom:18px;max-width:800px;animation:fadeUp 1s ease}
+.hero p{font-size:1.15rem;font-style:italic;max-width:580px;text-shadow:1px 1px 4px rgba(0,0,0,.4);animation:fadeUp 1.3s ease}
+.scroll-hint{margin-top:40px;font-size:.85rem;opacity:.7;animation:bounce 2s infinite}
+
+/* SECTIONS */
+.section{padding:70px 40px}
+.section-title{text-align:center;font-size:2rem;color:var(--rojo);margin-bottom:35px}
+.section-title::after{content:'';display:block;width:70px;height:3px;background:var(--dorado);margin:10px auto 0}
+.card{background:#fff;border-radius:16px;padding:30px;box-shadow:0 5px 25px rgba(0,0,0,.08)}
+.card-red-top{border-top:5px solid var(--rojo)}
+
+/* GRID HELPERS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+
+/* WHY */
+.why-box{max-width:850px;margin:0 auto;text-align:center;line-height:1.9;font-size:1.05rem}
+.why-box .emoji-big{font-size:5rem;display:block;margin-bottom:20px}
+
+/* ABOUT */
+.person-card{background:#fff;border-radius:16px;padding:30px;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+.avatar{width:150px;height:150px;border-radius:50%;overflow:hidden;margin:0 auto 15px;border:4px solid var(--dorado);box-shadow:0 4px 15px rgba(0,0,0,.15)}
+.avatar img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+
+/* LEGAL REFS */
+.legal-box{max-width:860px;margin:40px auto 0;background:#fff;border-radius:16px;padding:30px;box-shadow:0 5px 25px rgba(0,0,0,.08);border-top:5px solid var(--azul)}
+.legal-box h3{color:var(--azul);margin-bottom:10px;font-size:1.2rem}
+.legal-box p{color:#555;line-height:1.8;margin-bottom:18px;font-size:.95rem}
+.legal-item{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-left:4px solid var(--dorado);margin-bottom:12px;background:var(--crema);border-radius:0 10px 10px 0}
+.legal-item strong{color:var(--marron);font-size:.95rem}
+.legal-item a{color:var(--azul);font-size:.83rem;word-break:break-all;text-decoration:none}
+.legal-item a:hover{text-decoration:underline}
+
+/* CALENDAR */
+.cal-wrap{max-width:380px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.1)}
+.cal-header{background:var(--rojo);color:#fff;padding:18px;text-align:center;font-size:1.2rem;font-weight:bold}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:12px}
+.cal-dn{text-align:center;font-size:.7rem;color:#999;padding:6px 0;font-weight:bold}
+.cal-day{text-align:center;padding:8px 4px;border-radius:8px;font-size:.88rem;cursor:default;line-height:1.2}
+.cal-day.special{background:var(--rojo);color:#fff;font-weight:bold;animation:pulse 2s infinite}
+.cal-badge{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;padding:14px 22px;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,.08);max-width:380px;margin-left:auto;margin-right:auto}
+
+/* TABS */
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:20px}
+.tab-btn{padding:9px 18px;border:none;border-radius:20px;cursor:pointer;background:#f0f0f0;font-family:Georgia,serif;font-size:.9rem;transition:all .3s}
+.tab-btn.active{background:var(--rojo);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* TESTIMONY */
+.testimony-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 5px 25px rgba(0,0,0,.1);margin-bottom:30px}
+.testimony-header{background:linear-gradient(135deg,var(--marron),var(--rojo));color:#fff;padding:18px 24px;display:flex;align-items:center;gap:14px}
+.testimony-num{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.1rem;flex-shrink:0}
+.testimony-body{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:start}
+.testimony-text{padding:24px;line-height:1.85;font-size:.95rem;border-right:1px solid #f0e8e0;display:flex;flex-direction:column;gap:12px}
+.testimony-text img{width:100%;height:220px;object-fit:cover;border-radius:10px;flex-shrink:0}
+.testimony-text p{margin-bottom:0;color:#333}
+.testimony-text .ref{font-size:.8rem;color:#999;font-style:italic;border-top:1px solid #f0f0f0;padding-top:10px;margin-top:4px}
+.testimony-interact{padding:24px;background:var(--crema)}
+.testimony-interact h4{color:var(--marron);font-size:.9rem;margin-bottom:10px;font-weight:bold}
+.emotion-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.emotion-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;background:#fff;border:2px solid var(--dorado);border-radius:20px;cursor:pointer;transition:all .3s;font-family:Georgia,serif;font-size:.82rem}
+.emotion-btn:hover,.emotion-btn.sel{background:var(--rojo);color:#fff;border-color:var(--rojo)}
+.action-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.action-btn{padding:8px 14px;background:#fff;border:2px solid #ddd;border-radius:10px;cursor:pointer;font-family:Georgia,serif;font-size:.82rem;transition:all .3s;display:flex;align-items:center;gap:5px}
+.action-btn:hover,.action-btn.sel{border-color:var(--rojo);background:#fff0f0}
+canvas{display:block;width:100%;height:140px;border:2px dashed var(--dorado);border-radius:10px;cursor:crosshair;background:#FAFAFA}
+.canvas-tools{display:flex;gap:8px;align-items:center;margin-top:8px}
+
+/* ECOS */
+.ecos-box{background:#fff;border-radius:14px;padding:28px;border-left:5px solid var(--azul);margin-bottom:18px}
+
+/* GAMES */
+#juegos{background:linear-gradient(135deg,#FFF8F0,#FFE8D0)}
+.game-card{background:#fff;border-radius:20px;padding:28px;box-shadow:0 8px 28px rgba(0,0,0,.1);transition:transform .3s;cursor:pointer}
+.game-card:hover{transform:translateY(-6px)}
+.game-icon{font-size:3rem;margin-bottom:12px}
+.game-card h3{color:var(--rojo);margin-bottom:10px}
+.game-card p{color:#666;font-size:.9rem;margin-bottom:18px;line-height:1.6}
+
+/* BTN */
+.btn{display:inline-block;padding:11px 24px;background:var(--rojo);color:#fff;border:none;border-radius:25px;cursor:pointer;font-size:.95rem;font-family:Georgia,serif;transition:all .3s;text-decoration:none}
+.btn:hover{background:var(--marron);transform:scale(1.04)}
+.btn:disabled{background:#ddd;color:#999;cursor:not-allowed;transform:none}
+.btn-gold{background:var(--dorado);color:var(--texto)}
+.btn-gold:hover{background:#B8860B}
+.btn-blue{background:var(--azul);color:#fff}
+.btn-blue:hover{background:#153d5a}
+.btn-ghost{background:#fff;color:var(--marron);border:2px solid #ddd}
+.btn-ghost:hover{background:#f5f5f5;color:var(--marron)}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:2000;align-items:center;justify-content:center}
+.modal.open{display:flex}
+.modal-box{background:#fff;border-radius:20px;padding:36px;max-width:620px;width:92%;max-height:88vh;overflow-y:auto;position:relative}
+.modal-box.wide{max-width:1000px}
+.modal-close{position:absolute;top:14px;right:18px;font-size:1.4rem;cursor:pointer;color:#999;background:none;border:none;font-family:Georgia,serif;z-index:10}
+.modal-close:hover{color:var(--rojo)}
+
+/* QUIZ */
+.q-text{font-weight:bold;color:var(--rojo);margin-bottom:14px;font-size:1rem}
+.q-opt{padding:11px 18px;border:2px solid #ddd;border-radius:10px;cursor:pointer;margin-bottom:8px;transition:all .3s}
+.q-opt:hover{border-color:var(--rojo);background:#FFF0F0}
+.q-opt.correct{border-color:#27AE60;background:#EAFAF1;pointer-events:none}
+.q-opt.wrong{border-color:#E74C3C;background:#FDEDEC;pointer-events:none}
+.q-note{display:none;padding:10px 14px;background:var(--crema);border-radius:8px;font-style:italic;font-size:.88rem;color:var(--marron);margin-top:8px}
+.q-block{background:var(--crema);border-radius:12px;padding:18px;margin-bottom:18px}
+
+/* ══ JUEGO DE VESTIR ══ */
+.dress-screen{display:none}
+.dress-screen.active{display:block}
+.dress-intro{background:var(--crema);border-left:5px solid var(--dorado);border-radius:0 12px 12px 0;padding:18px 22px;margin-bottom:24px;line-height:1.8}
+.pick-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:520px;margin:0 auto}
+.pick-card{background:var(--crema);border:3px solid #eee;border-radius:18px;padding:20px;text-align:center;cursor:pointer;transition:all .25s}
+.pick-card:hover{border-color:var(--rojo);transform:translateY(-5px);box-shadow:0 8px 20px rgba(196,30,58,.15)}
+.pick-card img{width:auto;max-width:100%;height:190px;object-fit:contain;display:block;margin:0 auto}
+.pick-card h3{color:var(--rojo);margin-top:10px}
+.game-row{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
+.stage{background:linear-gradient(180deg,#F3E5D8,#E8D5C0);border-radius:16px;padding:16px;display:flex;align-items:flex-end;justify-content:center;min-height:470px}
+.doll{width:100%;height:440px;display:flex;align-items:flex-end;justify-content:center}
+svg.figure{width:100%;height:100%;display:block;overflow:visible}
+.dress-panel h3{color:var(--rojo);font-size:1rem;margin-bottom:10px}
+.cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.cat-btn{padding:8px 14px;border:none;border-radius:20px;background:#f0f0f0;cursor:pointer;font-family:Georgia,serif;font-size:.85rem;transition:all .25s}
+.cat-btn.active{background:var(--rojo);color:#fff}
+.cat-btn.done::after{content:' ✓';color:var(--verde);font-weight:bold}
+.cat-btn.active.done::after{color:#fff}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px}
+.opt{background:var(--crema);border:3px solid #e5e5e5;border-radius:12px;padding:8px;cursor:pointer;text-align:center;transition:all .2s}
+.opt:hover{border-color:var(--dorado);transform:translateY(-3px)}
+.opt.sel{border-color:var(--rojo);background:#FFF0F0}
+.opt svg{width:100%;height:82px;display:block}
+.opt span{display:block;font-size:.68rem;color:#666;margin-top:6px;line-height:1.3}
+.dress-bar{display:flex;gap:10px;align-items:center;margin-top:20px;flex-wrap:wrap}
+.progress{flex:1;min-width:110px;height:10px;background:#eee;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--dorado),var(--rojo));width:0;transition:width .4s}
+.note{margin-top:16px;background:#F5EAFF;border-left:4px solid var(--morado);border-radius:0 10px 10px 0;padding:12px 16px;font-size:.83rem;line-height:1.7;color:#555}
+.note strong{color:var(--morado)}
+.final-scene{background:linear-gradient(180deg,#A8D8F0 0%,#A8D8F0 58%,#C8E6A0 58%,#C8E6A0 100%);border-radius:16px;padding:26px 16px 20px;margin-bottom:20px}
+.final-kids{display:flex;align-items:flex-end;justify-content:center;gap:14px;flex-wrap:wrap}
+.final-doll{width:150px;height:240px;display:flex;align-items:flex-end}
+.classmate{text-align:center;padding-bottom:8px}
+.classmate div{font-size:3rem;line-height:1}
+.classmate small{display:block;font-size:.6rem;color:#2C1810;margin-top:2px}
+
+/* ══ MATCH ══ */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.match-col h4{text-align:center;margin-bottom:10px}
+.m-item{padding:11px 14px;border:2px solid #ddd;border-radius:10px;cursor:pointer;text-align:center;transition:all .3s;margin-bottom:8px;font-size:.9rem}
+.m-item:hover{border-color:var(--rojo)}
+.m-item.sel{border-color:var(--rojo);background:#FFF0F0}
+.m-item.matched{border-color:#27AE60;background:#EAFAF1;pointer-events:none}
+.m-item.wrong-flash{border-color:#E74C3C;background:#FDEDEC}
+
+/* ══ ROMPECABEZAS ══ */
+.puz-wrap{display:flex;flex-direction:column;gap:14px;align-items:center}
+#puz-board{position:relative;width:100%;max-width:480px;background:#EFE3D2;border-radius:12px;border:3px dashed #D8C4AC}
+.puz-slot{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+#puz-tray{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;
+  min-height:120px;width:100%;max-width:520px;background:#FBF3E2;border-radius:12px;padding:10px;border:2px solid #E8D5C0}
+.puz-piece{cursor:grab;touch-action:none;user-select:none;transition:transform .12s}
+.puz-piece svg{width:100%;height:100%;display:block;overflow:visible;pointer-events:none}
+.puz-piece:hover:not(.locked){transform:scale(1.05)}
+#puz-tray .puz-piece:not(.dragging){width:104px;height:104px;flex:0 0 auto}
+.puz-piece.dragging{position:fixed;z-index:3000;cursor:grabbing;transform:scale(1.06);filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+#puz-board .puz-piece{position:absolute;cursor:default}
+.puz-piece.locked{cursor:default;animation:snapIn .3s ease}
+@keyframes snapIn{0%{transform:scale(1.12)}60%{transform:scale(.97)}100%{transform:scale(1)}}
+#puz-layer{position:fixed;inset:0;pointer-events:none;z-index:3000}
+#puz-layer .puz-piece{pointer-events:auto}
+#puz-preview img{width:110px;height:74px;object-fit:cover;border-radius:8px;border:2px solid var(--dorado)}
+#puz-sel-wrap{margin:10px 0}
+#puz-img{font-family:Georgia,serif;padding:6px 10px;border-radius:8px;border:2px solid var(--dorado);background:#fff;font-size:.88rem}
+#puz-count{color:var(--marron);font-weight:bold;font-size:.95rem}
+
+/* ══ SONIDOS ══ */
+.audio-block{background:var(--crema);border-radius:12px;padding:18px;margin-bottom:18px}
+.audio-player{width:100%;margin:10px 0}
+.audio-missing{background:#FFF3E0;border-left:4px solid var(--dorado);border-radius:0 8px 8px 0;padding:12px 14px;font-size:.83rem;color:#8B6914;line-height:1.6;margin:10px 0}
+.audio-missing code{background:#fff;padding:2px 6px;border-radius:4px;font-size:.8rem}
+
+/* ══ GLOSARIO ══ */
+.glos-prog{text-align:center;font-size:.82rem;color:#999;margin-bottom:10px}
+.glos-instr{text-align:center;font-size:1.05rem;color:var(--texto);line-height:1.6;margin-bottom:18px}
+.glos-word-row{text-align:center;margin-bottom:22px}
+.glos-word{font-size:2rem;color:var(--rojo);font-weight:bold;letter-spacing:.5px}
+.glos-play{margin-top:10px;width:52px;height:52px;border-radius:50%;border:3px solid var(--rojo);background:#fff;color:var(--rojo);font-size:1.4rem;cursor:pointer;transition:all .25s;line-height:1}
+.glos-play:hover:not(:disabled){background:var(--rojo);color:#fff;transform:scale(1.08)}
+.glos-play.no-audio{border-color:#ccc;color:#ccc;cursor:not-allowed}
+.glos-play.no-audio::after{content:' pendiente';font-size:.5rem;display:block}
+.glos-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-bottom:16px}
+.glos-opt{background:#fff;border:3px solid #e0e0e0;border-radius:12px;padding:8px;cursor:pointer;text-align:center;transition:all .2s}
+.glos-opt:hover{border-color:var(--dorado);transform:translateY(-4px)}
+.glos-opt img{width:100%;height:88px;object-fit:contain;display:block;border-radius:8px}
+.glos-opt span{display:block;font-size:.75rem;color:#666;margin-top:6px}
+.glos-opt.ok{border-color:var(--verde);background:#EAFAF1}
+.glos-opt.bad{border-color:#E74C3C;background:#FDEDEC}
+.glos-note{background:#F5EAFF;border-left:4px solid var(--morado);border-radius:0 10px 10px 0;padding:12px 16px;font-size:.86rem;line-height:1.7;color:#555;margin-bottom:14px}
+.glos-final{text-align:center;padding:20px}
+.glos-final .big{font-size:3rem;margin-bottom:12px}
+
+/* CULTURE */
+.culture-hero{min-height:320px;background:linear-gradient(135deg,#1a0a05,#3D1C0E,#C41E3A);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:60px 20px}
+.culture-intro{max-width:720px;margin:0 auto;line-height:1.9;font-style:italic;opacity:.9;font-size:1rem}
+.c-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.1)}
+.c-card-head{background:linear-gradient(135deg,var(--rojo),var(--marron));color:#fff;padding:18px 22px;font-size:1.05rem;font-weight:bold}
+.c-card-body{padding:22px}
+
+/* GLOSSARY */
+.glos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.glos-item{background:var(--crema);border:2px solid var(--dorado);border-radius:10px;padding:14px;text-align:center}
+.glos-rom{font-size:1rem;font-weight:bold;color:var(--rojo)}
+.glos-es{font-size:.83rem;color:#666;margin-top:4px}
+
+/* HYMN */
+.hymn-box{max-width:680px;margin:0 auto;background:linear-gradient(135deg,#1a0a05,#3D1C0E);color:#fff;border-radius:20px;padding:38px}
+.hymn-chorus{color:var(--dorado);font-weight:bold;margin:8px 0}
+
+/* LEARNING */
+.ideas-li{list-style:none;padding:0}
+.ideas-li li{padding:12px 16px;border-left:4px solid var(--dorado);margin-bottom:10px;background:var(--crema);border-radius:0 10px 10px 0}
+.teach-item{text-align:center;padding:20px;background:var(--crema);border-radius:12px}
+
+/* RESULT */
+.result-box{background:var(--crema);padding:16px;border-radius:10px;text-align:center;font-size:1rem;margin-top:14px}
+
+
+/* ECOS DE LA MEMORIA */
+.eco-title{color:var(--dorado);text-align:center;font-size:1.5rem;margin-bottom:16px}
+.eco-intro,.eco-cierre{background:rgba(255,255,255,.08);border-radius:12px;padding:20px 24px;color:#e0c9a0;line-height:1.85;font-size:.95rem}
+.eco-intro p+p,.eco-cierre p+p{margin-top:12px}
+.eco-intro{margin-bottom:28px}.eco-cierre{margin:10px 0 28px}
+.eco-card{background:#fff;color:var(--texto);border-radius:16px;overflow:hidden;box-shadow:0 5px 25px rgba(0,0,0,.25);margin-bottom:22px}
+.eco-head{background:linear-gradient(135deg,var(--marron),var(--rojo));color:#fff;padding:14px 22px;display:flex;align-items:center;gap:12px;font-weight:bold}
+.eco-body{padding:16px 22px 20px}
+.eco-ref{font-size:.82rem;color:#777;line-height:1.7;border-top:1px solid #f0e8e0;padding-top:10px;margin-top:6px}
+/* CUENTO */
+.cuento-card{max-width:860px;margin:0 auto;line-height:1.9}
+.cuento-card p{margin-bottom:14px}
+.cuento-cover{display:block;width:100%;max-width:720px;margin:22px auto;border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.cuento-links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.nav-links{justify-content:center}
+section[id]{scroll-margin-top:64px}
+
+/* ANIMATIONS */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* FOOTER */
+footer{background:var(--texto);color:#fff;padding:40px;text-align:center}
+
+@media(max-width:768px){
+  nav{padding:10px 15px;flex-direction:column;gap:6px}
+  .nav-links a{font-size:.75rem;padding:5px 8px}
+  .hero h1{font-size:1.8rem}
+  .grid-2{grid-template-columns:1fr}
+  .section{padding:50px 20px}
+  .testimony-body{grid-template-columns:1fr}
+  .testimony-text{border-right:none;border-bottom:1px solid #f0e8e0}
+  .game-row{grid-template-columns:1fr}
+  .stage{min-height:400px}
+  .doll{height:380px}
+  #puz-tray .puz-piece{width:88px;height:88px}
+  .modal-box{padding:24px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>🦋</span> Paparuga: Pueblo Gitano</div>
+  <ul class="nav-links">
+    <li><a href="#inicio" class="active">Inicio</a></li>
+    <li><a href="#relatos">Relatos</a></li>
+    <li><a href="#juegos">Juegos</a></li>
+    <li><a href="#cultura">Cultura</a></li>
+    <li><a href="#aprendizaje">Aprendizaje</a></li>
+    <li><a href="#familia">Familia</a></li>
+    <li><a href="#cuento">Cuento</a></li>
+  </ul>
+</nav>
+
+<!-- ===== INICIO ===== -->
+<section id="inicio">
+  <div class="hero">
+    <div class="hero-butterfly">🦋</div>
+    <h1>MEMORIA Y VOCES DEL PUEBLO GITANO (RROM)</h1>
+    <p>Una voz a la memoria del Pueblo Gitano: Porque la memoria también es un acto de resistencia.</p>
+    <div class="scroll-hint" style="margin-top:40px">↓ Explora</div>
+  </div>
+
+  <div class="section" style="background:var(--crema)">
+    <h2 class="section-title">¿Por qué Paparuga?</h2>
+    <div class="why-box card" style="max-width:860px">
+      <span class="emoji-big">🦋</span>
+      <p><strong>Paparuga es Mariposa en romaní.</strong> En este caso, Paparuga representa un espacio que visibiliza las prácticas culturales del pueblo gitano; es un símbolo de <strong>transformación y resistencia</strong>. Un espacio donde las historias, raíces y voces del pueblo gitano alzan vuelo, reafirmando su identidad en medio de la indiferencia y el olvido.</p>
+    </div>
+  </div>
+
+  <div class="section" style="background:#fff">
+    <h2 class="section-title">Sobre Nosotras</h2>
+    <div class="grid-2" style="max-width:780px;margin:0 auto 30px">
+      <div class="person-card">
+        <div class="avatar"><img src="carol.jpeg" alt="Carol"></div>
+        <h3 style="color:var(--rojo)">Carol</h3>
+        <p style="color:#666;font-size:.9rem;margin-top:6px">Estudiante en Educación Infantil<br>Universidad El Bosque</p>
+      </div>
+      <div class="person-card">
+        <div class="avatar"><img src="dana.jpeg" alt="Dana"></div>
+        <h3 style="color:var(--rojo)">Dana</h3>
+        <p style="color:#666;font-size:.9rem;margin-top:6px">Estudiante en Educación Infantil<br>Universidad El Bosque</p>
+      </div>
+    </div>
+    <div class="card" style="max-width:860px;margin:0 auto;text-align:center;line-height:1.9">
+      Somos Carol y Dana, estudiantes en Educación Infantil de la Universidad El Bosque, creadoras de Paparuga, un proyecto que nace desde la educación y el corazón con el propósito de <strong>visibilizar, reconocer y aprender del pueblo gitano</strong>. Este camino no lo recorremos solas, sino en diálogo y construcción conjunta con el pueblo, reconociendo sus voces, saberes y formas de habitar el mundo. Somos voces que aprendieron a escuchar y miradas que eligieron ver más allá de lo visible. Somos promotoras de una educación más diversa, humana y consciente.
+    </div>
+  </div>
+
+  <div class="section" style="background:var(--crema)">
+    <h2 class="section-title">Agenda Paparuga</h2>
+    <div id="cal"></div>
+    <div class="cal-badge" style="margin-top:18px">
+      <span style="width:18px;height:18px;background:var(--rojo);border-radius:50%;display:inline-block;flex-shrink:0"></span>
+      <span><strong>8 de abril:</strong> Día Internacional del Pueblo Gitano (Rrom) 🦋</span>
+    </div>
+  </div>
+
+  <div class="section" style="background:#fff">
+    <h2 class="section-title">Referentes Legales</h2>
+    <div class="legal-box">
+      <h3>⚖️ Marco normativo que respalda este proyecto</h3>
+      <p>Este proyecto se fundamenta en normativas y marcos legales que reconocen la diversidad cultural, los derechos del pueblo Rrom/Gitano y la importancia de una educación intercultural e inclusiva. A continuación, se presentan algunos referentes legales que respaldan el reconocimiento de la diversidad cultural y la educación intercultural.</p>
+      <div class="legal-item">
+        <strong>📋 Decreto 804 de 1995</strong>
+        <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma_pdf.php?i=1377" target="_blank">funcionpublica.gov.co — Decreto 804 de 1995 ↗</a>
+      </div>
+      <div class="legal-item">
+        <strong>📚 Ley 115 de 1994 — Ley General de Educación</strong>
+        <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma_pdf.php?i=292" target="_blank">funcionpublica.gov.co — Ley 115 de 1994 ↗</a>
+      </div>
+      <div class="legal-item">
+        <strong>🛡️ Decreto 2957 de 2010 — Marco normativo para la protección integral de los derechos del grupo étnico Rom o Gitano</strong>
+        <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma_pdf.php?i=40124" target="_blank">funcionpublica.gov.co — Decreto 2957 de 2010 ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RELATOS ===== -->
+<section id="relatos" class="section" style="background:linear-gradient(135deg,#1a0a05 0%,#3D1C0E 100%);color:#fff">
+  <h2 class="section-title" style="color:var(--dorado)">Relatos</h2>
+
+  <div class="tabs" style="justify-content:center">
+    <button class="tab-btn active" onclick="tab('mem',this)">📜 Memorias en Palabras</button>
+    <button class="tab-btn" onclick="tab('eco',this)">🎙️ Ecos de la Memoria</button>
+  </div>
+
+  <div id="tab-mem" class="tab-content active">
+    <div style="max-width:900px;margin:0 auto">
+      <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:18px 22px;margin-bottom:28px;text-align:center;color:#e0c9a0;font-style:italic;font-size:.93rem;line-height:1.8">
+        Estas historias han sido adaptadas con sensibilidad para promover el respeto, la empatía y el reconocimiento de la diversidad cultural. Los relatos se inspiran en testimonios recopilados por la Comisión de la Verdad.
+      </div>
+
+      <!-- TESTIMONIO 1 -->
+      <div class="testimony-card">
+        <div class="testimony-header">
+          <div class="testimony-num">1</div>
+          <div>
+            <h3 style="font-size:1.05rem;margin-bottom:3px">Tuvimos que irnos para protegernos</h3>
+            <span style="font-size:.82rem;opacity:.8">Comisión de la Verdad</span>
+          </div>
+        </div>
+        <div class="testimony-body">
+          <div class="testimony-text">
+            <img src="Tuvimos que irnos para protegernos.png" alt="Testimonio 1" style="object-position:center 65%">
+            <p>Una familia del pueblo gitano recordó un momento difícil mientras trabajaba viajando y vendiendo sus productos. Algunas personas no comprendieron quiénes eran ni respetaron su cultura, por lo que sintieron miedo y tuvieron que abandonar el lugar rápidamente para permanecer juntos y proteger a su hijo.</p>
+            <p>A pesar de lo vivido, esta familia defendió con orgullo sus raíces, su idioma romaní y el amor que los mantenía unidos.</p>
+            <p class="ref">Relato adaptado de testimonios recopilados por la Comisión de la Verdad (2022).</p>
+          </div>
+          <div class="testimony-interact">
+            <h4>¿Cómo crees que se siente esta persona?</h4>
+            <div class="emotion-row" id="em-t1">
+              <button class="emotion-btn" onclick="pickEm('em-t1',this)">😢 Triste</button>
+              <button class="emotion-btn" onclick="pickEm('em-t1',this)">😨 Asustada</button>
+              <button class="emotion-btn" onclick="pickEm('em-t1',this)">😟 Preocupada</button>
+              <button class="emotion-btn" onclick="pickEm('em-t1',this)">🌟 Esperanzada</button>
+            </div>
+            <h4>¿Qué harías tú, ahora que conoces la historia?</h4>
+            <div class="action-row">
+              <button class="action-btn" onclick="this.classList.toggle('sel')">❤️ Ayudar</button>
+              <button class="action-btn" onclick="this.classList.toggle('sel')">👂 Escuchar</button>
+              <button class="action-btn" onclick="this.classList.toggle('sel')">🤝 Acompañar</button>
+            </div>
+            <h4 style="margin-bottom:6px">Después de leer… dibuja lo que imaginaste</h4>
+            <canvas id="cv-t1"></canvas>
+            <div class="canvas-tools">
+              <button class="btn btn-gold" onclick="clearCv('cv-t1')" style="padding:6px 14px;font-size:.8rem">Limpiar</button>
+              <input type="color" id="col-t1" value="#C41E3A" style="height:32px;width:38px;border:none;border-radius:6px;cursor:pointer">
+              <input type="range" id="sz-t1" min="1" max="12" value="3" style="flex:1">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TESTIMONIO 2 -->
+      <div class="testimony-card">
+        <div class="testimony-header">
+          <div class="testimony-num">2</div>
+          <div>
+            <h3 style="font-size:1.05rem;margin-bottom:3px">Quería estudiar, pero no todos la comprendían</h3>
+            <span style="font-size:.82rem;opacity:.8">Comisión de la Verdad</span>
+          </div>
+        </div>
+        <div class="testimony-body">
+          <div class="testimony-text">
+            <img src="segundo testimonio.png" alt="Testimonio 2" style="object-position:center 15%">
+            <p>Una joven del pueblo gitano recordó que, cuando era niña, muchas personas no comprendían su cultura ni respetaban la forma en que vestía su familia. En algunos espacios escolares se sintió rechazada y le costaba hacer amigos, porque existían prejuicios y desinformación sobre el pueblo gitano.</p>
+            <p>Aun así, su familia siempre creyó en la importancia de aprender y conservar con orgullo sus raíces y tradiciones.</p>
+            <p class="ref">Relato adaptado de testimonios recopilados por la Comisión de la Verdad (2022).</p>
+          </div>
+          <div class="testimony-interact">
+            <h4>¿Cómo crees que se siente esta persona?</h4>
+            <div class="emotion-row" id="em-t2">
+              <button class="emotion-btn" onclick="pickEm('em-t2',this)">😢 Triste</button>
+              <button class="emotion-btn" onclick="pickEm('em-t2',this)">😔 Sola</button>
+              <button class="emotion-btn" onclick="pickEm('em-t2',this)">😕 Incomprendida</button>
+              <button class="emotion-btn" onclick="pickEm('em-t2',this)">💪 Valiente</button>
+            </div>
+            <h4>¿Qué harías tú, ahora que conoces la historia?</h4>
+            <div class="action-row">
+              <button class="action-btn" onclick="this.classList.toggle('sel')">❤️ Ayudar</button>
+              <button class="action-btn" onclick="this.classList.toggle('sel')">👂 Escuchar</button>
+              <button class="action-btn" onclick="this.classList.toggle('sel')">🤝 Acompañar</button>
+            </div>
+            <h4 style="margin-bottom:6px">Después de leer… dibuja lo que imaginaste</h4>
+            <canvas id="cv-t2"></canvas>
+            <div class="canvas-tools">
+              <button class="btn btn-gold" onclick="clearCv('cv-t2')" style="padding:6px 14px;font-size:.8rem">Limpiar</button>
+              <input type="color" id="col-t2" value="#1B4F72" style="height:32px;width:38px;border:none;border-radius:6px;cursor:pointer">
+              <input type="range" id="sz-t2" min="1" max="12" value="3" style="flex:1">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TESTIMONIO 3 -->
+      <div class="testimony-card">
+        <div class="testimony-header">
+          <div class="testimony-num">3</div>
+          <div>
+            <h3 style="font-size:1.05rem;margin-bottom:3px">Las costumbres comenzaron a cambiar</h3>
+            <span style="font-size:.82rem;opacity:.8">Comisión de la Verdad</span>
+          </div>
+        </div>
+        <div class="testimony-body">
+          <div class="testimony-text">
+            <img src="tercer testimonio.png" alt="Testimonio 3" style="object-fit:contain;background:#f9f0e0">
+            <p>Un joven del pueblo Rrom contó que, con el paso del tiempo y por miedo a diferentes situaciones vividas, algunas familias dejaron de viajar como antes y varias tradiciones comenzaron a transformarse. Poco a poco, algunas palabras en romaní, formas de vestir y oficios tradicionales dejaron de compartirse entre generaciones.</p>
+            <p>Aunque muchas cosas cambiaron, las familias continúan buscando maneras de mantener viva su cultura, su memoria y sus raíces.</p>
+            <p class="ref">Relato adaptado de testimonios recopilados por la Comisión de la Verdad (2022).<br>
+            Comisión de la Verdad. (2022). <em>Resistir no es aguantar: Violencias y daños contra los pueblos étnicos de Colombia.</em></p>
+          </div>
+          <div class="testimony-interact">
+            <h4>¿Cómo crees que se siente esta persona?</h4>
+            <div class="emotion-row" id="em-t3">
+              <button class="emotion-btn" onclick="pickEm('em-t3',this)">😢 Nostálgica</button>
+              <button class="emotion-btn" onclick="pickEm('em-t3',this)">😟 Preocupada</button>
+              <button class="emotion-btn" onclick="pickEm('em-t3',this)">🌟 Esperanzada</button>
+              <button class="emotion-btn" onclick="pickEm('em-t3',this)">🏆 Orgullosa de su cultura</button>
+            </div>
+            <h4>¿Qué harías tú, ahora que conoces la historia?</h4>
+            <div class="action-row">
+              <button class="action-btn" onclick="this.classList.toggle('sel')">❤️ Ayudar</button>
+              <button class="action-btn" onclick="this.classList.toggle('sel')">👂 Escuchar</button>
+              <button class="action-btn" onclick="this.classList.toggle('sel')">🤝 Acompañar</button>
+            </div>
+            <h4 style="margin-bottom:6px">Después de leer… dibuja algo importante que creas que nunca debería olvidarse de una cultura</h4>
+            <canvas id="cv-t3"></canvas>
+            <div class="canvas-tools">
+              <button class="btn btn-gold" onclick="clearCv('cv-t3')" style="padding:6px 14px;font-size:.8rem">Limpiar</button>
+              <input type="color" id="col-t3" value="#7D3C98" style="height:32px;width:38px;border:none;border-radius:6px;cursor:pointer">
+              <input type="range" id="sz-t3" min="1" max="12" value="3" style="flex:1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-eco" class="tab-content">
+    <div style="max-width:900px;margin:0 auto">
+      <h3 class="eco-title">🎙️ Ecos de la memoria</h3>
+      <div class="eco-intro">
+        <p>Los siguientes relatos hacen parte de los testimonios recopilados por la Comisión para el Esclarecimiento de la Verdad, la Convivencia y la No Repetición, sobre las experiencias y afectaciones vividas por el pueblo Rrom o Gitano en Colombia.</p>
+        <p>Estas voces permiten acercarnos no solo a las huellas del conflicto armado, sino también a situaciones de estigmatización, discriminación y exclusión que han marcado sus historias y su identidad como pueblo.</p>
+        <p>Compartimos estos testimonios respetando su sentido y las palabras registradas en la fuente, como una invitación a escuchar, reconocer y valorar sus memorias.</p>
+      </div>
+
+      <div id="eco-list"></div>
+
+      <div class="eco-cierre">
+        <p>Escuchar estas voces es también reconocer una memoria que merece ser contada y escuchada. Los relatos nos invitan a mirar más allá de las experiencias de violencia y a reconocer al pueblo Rrom desde su identidad, su cultura, sus saberes y su capacidad de preservar su historia.</p>
+        <p>Que estas voces no sean solo memoria del pasado, sino una oportunidad para conocer, respetar y valorar al pueblo Rrom en el presente.</p>
+      </div>
+
+      <div class="card" style="color:var(--texto)">
+        <h4 style="color:var(--marron);margin-bottom:8px">¿Qué parte te impactó más?</h4>
+        <textarea style="width:100%;height:80px;padding:10px;border:2px solid var(--dorado);border-radius:10px;resize:vertical;font-family:Georgia,serif" placeholder="Escribe aquí tu reflexión..."></textarea>
+        <h4 style="color:var(--marron);margin:16px 0 8px">Dibuja lo que imaginaste mientras escuchabas estos relatos</h4>
+        <canvas id="cv2"></canvas>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
+          <button class="btn btn-gold" onclick="clearCv('cv2')" style="padding:8px 16px;font-size:.85rem">Limpiar</button>
+          <input type="color" id="col2" value="#1B4F72" style="height:36px;width:44px;border:none;border-radius:6px;cursor:pointer">
+          <input type="range" id="sz2" min="1" max="12" value="3" style="flex:1">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JUEGOS ===== -->
+<section id="juegos" class="section">
+  <h2 class="section-title">Juegos Interactivos</h2>
+  <p style="text-align:center;color:var(--marron);font-style:italic;margin-bottom:40px;font-size:1.1rem">🎮 Prepárate para jugar y descubrir una cultura llena de colores y significados</p>
+
+  <div class="grid-3" style="max-width:1100px;margin:0 auto">
+    <div class="game-card" onclick="openModal('m-dress');dressShow('s-intro')">
+      <div class="game-icon">👗</div>
+      <h3>Juego de Vestir</h3>
+      <p>Entre telas e historia — ayuda a Magüi y a Gabriel a vestirse con sus trajes tradicionales</p>
+      <button class="btn">¡Jugar!</button>
+    </div>
+    <div class="game-card" onclick="openModal('m-puzzle');initPuzzle()">
+      <div class="game-icon">🧩</div>
+      <h3>Rompecabezas</h3>
+      <p>Ordena las piezas para completar la imagen del pueblo gitano</p>
+      <button class="btn">¡Jugar!</button>
+    </div>
+    <div class="game-card" onclick="openModal('m-sounds');initSounds()">
+      <div class="game-icon">🎵</div>
+      <h3>Sonidos Romaní</h3>
+      <p>Escucha y responde preguntas sobre la música y cultura gitana</p>
+      <button class="btn">¡Jugar!</button>
+    </div>
+    <div class="game-card" onclick="openModal('m-glos');initGlos()">
+      <div class="game-icon">📖</div>
+      <h3>Glosario Romaní</h3>
+      <p>Lee la palabra y escoge la imagen que la representa</p>
+      <button class="btn">¡Jugar!</button>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL: GLOSARIO -->
+<div class="modal" id="m-glos">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-glos')">✕</button>
+    <h2 style="color:var(--rojo);margin-bottom:14px">📖 Glosario Romaní</h2>
+
+    <div id="glos-card">
+      <div class="glos-prog" id="glos-prog"></div>
+      <p class="glos-instr">Lee la palabra y escoge la imagen que la representa.</p>
+      <div class="glos-word-row">
+        <div class="glos-word" id="glos-word"></div>
+      </div>
+      <div class="glos-opts" id="glos-opts"></div>
+      <div class="glos-note" id="glos-note" style="display:none"></div>
+      <div style="text-align:center">
+        <button class="btn" id="glos-next" style="display:none" onclick="nextGlos()">Siguiente palabra →</button>
+      </div>
+    </div>
+
+    <div class="glos-final" id="glos-final" style="display:none">
+      <div class="big">🦋</div>
+      <h3 style="color:var(--rojo);margin-bottom:8px" id="glos-score"></h3>
+      <p style="color:#666;line-height:1.7;margin-bottom:20px" id="glos-msg"></p>
+      <button class="btn" onclick="initGlos()">Jugar de nuevo</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: JUEGO DE VESTIR -->
+<div class="modal" id="m-dress">
+  <div class="modal-box wide">
+    <button class="modal-close" onclick="closeModal('m-dress')">✕</button>
+    <h2 style="color:var(--rojo);margin-bottom:6px">👗 Juego de Vestir</h2>
+    <p style="color:#666;font-size:.9rem;margin-bottom:20px">Entre telas e historia — la vestimenta tradicional del pueblo Rrom</p>
+
+    <!-- 1. INTRO -->
+    <div class="dress-screen active" id="s-intro">
+      <div class="dress-intro">
+        <p style="font-size:1.02rem;margin-bottom:8px"><strong>Ayuda a Magüi y a Gabriel a vestirse con sus trajes tradicionales para ir a la escuela.</strong></p>
+        <p style="font-size:.9rem;color:#666">Elige a quién quieres acompañar.</p>
+      </div>
+      <div class="pick-row">
+        <div class="pick-card" onclick="startDress('magui')">
+          <img src="magui.png" alt="Magüi">
+          <h3>Magüi</h3>
+        </div>
+        <div class="pick-card" onclick="startDress('gabriel')">
+          <img src="gabriel.png" alt="Gabriel">
+          <h3>Gabriel</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. VESTIR -->
+    <div class="dress-screen" id="s-game">
+      <div class="game-row">
+        <div class="stage">
+          <div class="doll" id="doll"></div>
+        </div>
+        <div class="dress-panel">
+          <h3 id="panel-title">Viste a Magüi</h3>
+          <div class="cats" id="cats"></div>
+          <div class="opts" id="opts"></div>
+          <div class="note" id="note"></div>
+        </div>
+      </div>
+      <div class="dress-bar">
+        <button class="btn btn-ghost" onclick="dressShow('s-intro')">← Cambiar personaje</button>
+        <button class="btn btn-gold" onclick="resetOutfit()">Quitar todo</button>
+        <div class="progress"><div class="progress-fill" id="pfill"></div></div>
+        <button class="btn" id="btn-done" onclick="goSchool()" disabled>¡Listo para la escuela! →</button>
+      </div>
+    </div>
+
+    <!-- 3. ESCUELA -->
+    <div class="dress-screen" id="s-final" style="text-align:center">
+      <div class="final-scene">
+        <div class="final-kids" id="final-kids"></div>
+      </div>
+      <p style="font-size:1.02rem;line-height:1.8;max-width:640px;margin:0 auto 8px">
+        <strong id="final-name">Magüi</strong> ya está en la escuela con sus compañeros y compañeras, que también llevan los trajes tradicionales de sus pueblos y comunidades.
+      </p>
+      <p style="color:#666;font-style:italic;font-size:.9rem;max-width:640px;margin:0 auto 20px">
+        Cada traje cuenta una historia distinta. Ninguno vale más que otro.
+      </p>
+      <div class="dress-bar" style="justify-content:center">
+        <button class="btn btn-gold" onclick="dressShow('s-game')">← Volver a vestir</button>
+        <button class="btn" onclick="dressShow('s-intro')">Vestir al otro personaje</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: PUZZLE -->
+<div class="modal" id="m-puzzle">
+  <div class="modal-box" style="text-align:center">
+    <button class="modal-close" onclick="closeModal('m-puzzle')">✕</button>
+    <h2 style="color:var(--rojo);margin-bottom:6px">🧩 Rompecabezas</h2>
+    <p style="color:#666;font-size:.9rem">Arrastra cada pieza hasta su lugar. Cuando esté cerca, encaja sola.</p>
+    <div id="puz-sel-wrap">
+      <label style="font-size:.85rem;color:var(--marron)">Imagen:
+        <select id="puz-img" onchange="initPuzzle()"></select>
+      </label>
+    </div>
+    <div class="puz-wrap">
+      <div id="puz-count">0 de 6 piezas</div>
+      <div id="puz-board"></div>
+      <div id="puz-tray"></div>
+    </div>
+    <div id="puz-preview" style="margin:12px auto 0;width:fit-content"></div>
+    <p style="font-size:.72rem;color:#aaa;margin-top:4px">imagen completa</p>
+    <div id="puz-win" style="display:none;padding:16px;background:#EAFAF1;border-radius:10px;margin-top:14px;color:#27AE60;font-size:1.05rem">🎉 ¡Felicidades! ¡Completaste el rompecabezas!</div>
+    <button class="btn" style="margin-top:14px" onclick="initPuzzle()">Reiniciar</button>
+  </div>
+</div>
+
+<!-- MODAL: SONIDOS -->
+<div class="modal" id="m-sounds">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-sounds')">✕</button>
+    <h2 style="color:var(--rojo);margin-bottom:6px">🎵 Sonidos Romaní</h2>
+    <p style="color:#666;font-size:.9rem;margin-bottom:18px">Escucha cada fragmento y responde. Lo que sientes al escuchar también cuenta.</p>
+    <div id="sounds-body"></div>
+    <div id="sounds-result" class="result-box" style="display:none"></div>
+    <button class="btn" style="display:block;margin:14px auto 0" onclick="initSounds()">Reiniciar</button>
+  </div>
+</div>
+
+<!-- ===== CULTURA ===== -->
+<section id="cultura">
+  <div class="culture-hero">
+    <h2 style="font-size:clamp(1.8rem,4vw,3rem);margin-bottom:18px">CULTURA DEL PUEBLO GITANO</h2>
+    <div class="culture-intro">
+      <p style="font-weight:bold;font-size:1.1rem;margin-bottom:12px">¿Quiénes son los Rrom / Gitanos?</p>
+      <p>El pueblo Rrom/Gitano es un pueblo étnico que ha mantenido vivas sus raíces, memorias y formas de habitar el mundo a través del tiempo. Sus historias se tejen entre la familia, la palabra, el respeto y el profundo valor de la comunidad, donde cada enseñanza compartida guarda el eco de generaciones que han transmitido saberes, tradiciones y maneras de comprender la vida.</p>
+      <p style="margin-top:10px">Más allá de los estereotipos y las miradas externas, el pueblo gitano representa una cultura viva, diversa y llena de significado, en la que la unión familiar, la identidad cultural y el sentido de libertad continúan siendo pilares importantes. Sus costumbres, su lengua, sus relatos y expresiones culturales son parte de una memoria colectiva que sigue caminando y transformándose sin perder sus raíces.</p>
+      <p style="margin-top:14px;font-style:italic;opacity:.8">Descubre las tradiciones, saberes y expresiones que hacen única la cultura del pueblo gitano.</p>
+    </div>
+  </div>
+
+  <div class="section" style="background:var(--crema)">
+    <div class="grid-3" style="max-width:1100px;margin:0 auto">
+
+      <div class="c-card">
+        <div class="c-card-head">👗 Vestimenta — Colores que cuentan historias</div>
+        <div class="c-card-body">
+          <img src="vestimenta.png" alt="Vestimenta tradicional gitana" style="width:100%;border-radius:10px;object-fit:cover;object-position:center 25%;height:280px;margin-bottom:14px">
+          <p style="font-size:.9rem;line-height:1.75">Los trajes tradicionales del pueblo Rrom/Gitano reflejan historias, memorias y formas de habitar el mundo que han sido transmitidas entre generaciones. Más allá de sus colores y detalles, representan identidad, pertenencia y diversidad cultural. Aunque algunas formas de vestir han cambiado con el tiempo, muchas familias continúan conservando elementos que fortalecen sus raíces y su sentido de comunidad.</p>
+        </div>
+      </div>
+
+      <div class="c-card">
+        <div class="c-card-head">🗺️ Trayectorias y Viajes — Caminos que dejan huella</div>
+        <div class="c-card-body">
+          <img src="trayectorias y viajes.png" alt="Trayectorias y viajes del pueblo gitano" style="width:100%;border-radius:10px;object-fit:cover;max-height:220px;margin-bottom:12px">
+          <p style="font-size:.9rem;line-height:1.75">Durante muchos años, las familias del pueblo Rrom/Gitano recorrieron distintos caminos y territorios, llevando consigo sus saberes, costumbres y formas de vida. Estos viajes no solo hacían parte de su manera de vivir, sino también de una profunda conexión con la libertad, la comunidad y la transmisión de sus raíces culturales de generación en generación.</p>
+        </div>
+      </div>
+
+      <div class="c-card">
+        <div class="c-card-head">🔨 Oficios y Saberes — Saberes que perduran</div>
+        <div class="c-card-body">
+          <div class="tabs">
+            <button class="tab-btn active" onclick="tab('of-mus',this)">🎵 Música</button>
+            <button class="tab-btn" onclick="tab('of-com',this)">⚒️ Comercio</button>
+          </div>
+          <div id="tab-of-mus" class="tab-content active">
+            <img src="oficios y saberes.png" alt="Música gitana" style="width:100%;border-radius:10px;object-fit:cover;object-position:center 30%;max-height:160px;margin-bottom:8px">
+            <p style="margin-top:8px;font-size:.9rem">Canal de música gitana — <a href="https://youtube.com/@wailitatiana" target="_blank" style="color:var(--rojo)">Ver en YouTube ↗</a></p>
+          </div>
+          <div id="tab-of-com" class="tab-content">
+            <img src="musica y danza.png" alt="Comercio y oficios gitanos" style="width:100%;border-radius:10px;object-fit:cover;max-height:160px;margin-bottom:8px">
+            <p style="margin-top:8px;font-size:.9rem">El comercio ha sido una de las formas en las que muchas familias del pueblo Rrom/Gitano han transmitido sus conocimientos y sostenido sus comunidades a lo largo del tiempo. El trabajo con cobre, la elaboración de prendas coloridas y otros oficios tradicionales representan saberes compartidos entre generaciones, donde la creatividad, el esfuerzo y la identidad cultural continúan presentes en la vida cotidiana.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-card">
+        <div class="c-card-head">💃 Música y Danza — Ritmos que cuentan historias</div>
+        <div class="c-card-body">
+          <img src="musica y danza.png" alt="Música y danza gitana" style="width:100%;border-radius:10px;object-fit:cover;object-position:center 30%;max-height:220px;margin-bottom:12px">
+          <p style="font-size:.9rem;line-height:1.75;margin:12px 0">La música y la danza tradicional del pueblo Rrom/Gitano han sido formas de expresar emociones, encuentros, historias y memorias colectivas. En muchas de estas expresiones culturales, las mujeres suelen participar a través del canto, la danza y la elaboración de vestimentas tradicionales, mientras que los hombres, en algunos grupos y familias, acompañan con instrumentos y composiciones musicales. Estas prácticas, transmitidas entre generaciones, fortalecen los vínculos familiares, la identidad cultural y el sentido de comunidad.</p>
+          <a href="https://youtu.be/cxOx_YBxiSY?si=x3YbDzHCkT4Mrkac" target="_blank" rel="noopener" class="btn" style="font-size:.85rem">Ver en YouTube ↗</a>
+        </div>
+      </div>
+
+      <div class="c-card" style="grid-column:1/-1">
+        <div class="c-card-head">🗣️ Shib Romaní — Lengua e identidad Romaní</div>
+        <div class="c-card-body">
+          <p style="line-height:1.8;margin-bottom:22px">La shib romaní, también conocida como lengua romaní, es una de las expresiones culturales más importantes del pueblo Rrom/Gitano. A través de sus palabras, historias y formas de comunicarse, muchas familias han transmitido conocimientos, memorias y tradiciones de generación en generación. Aunque con el paso del tiempo algunas expresiones han cambiado o dejado de usarse, la lengua romaní continúa siendo un símbolo de identidad, memoria y pertenencia cultural.</p>
+          <div class="glos-grid" id="shib-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:50px">
+      <h3 style="text-align:center;color:var(--rojo);font-size:1.7rem;margin-bottom:6px">🎵 Himno del Pueblo Gitano</h3>
+      <p style="text-align:center;color:var(--marron);font-style:italic;margin-bottom:24px">Gelem, Gelem: un himno de memoria</p>
+      <div class="hymn-box">
+        <div style="line-height:2">
+          Fui, fui por caminos largos<br>
+          Conocí a los gitanos felices<br>
+          Oh, gitano, ¿de dónde vienes<br>
+          con carpas felices en el camino?
+          <div class="hymn-chorus">¡Oh, Rromá, oh, jóvenes rromá!</div>
+          <br>Una vez tuve una gran familia,<br>
+          La Legión Negra los asesinó<br>
+          Vengan conmigo, gitanos de todo el mundo<br>
+          Para los gitanos, se han abierto caminos
+          <div class="hymn-chorus">¡Oh, Rromá, oh, jóvenes rromá!</div>
+          <br>Ahora es el momento, levántate gitano ahora,<br>
+          Nos elevaremos alto si actuamos<br>
+          Abre, Dios, puertas blancas<br>
+          Así puedo ver dónde está mi gente.
+          <div class="hymn-chorus">¡Oh, Rromá, oh, jóvenes rromá!</div>
+          <br>Vuelve a recorrer los caminos<br>
+          Y caminar con mi pueblo Rrom feliz<br>
+          ¡Arriba, pueblo gitano! Ahora es el momento<br>
+          Vengan conmigo, gitanos de todo el mundo
+          <div class="hymn-chorus">¡Oh, Rromá, oh, jóvenes rromá!</div>
+          <br>Cara oscura y ojos oscuros,<br>
+          los quiero como uvas oscuras
+          <div class="hymn-chorus">¡Oh, Rromá, oh, jóvenes rromá!</div>
+        </div>
+        <div style="text-align:center;margin-top:28px">
+          <a href="https://youtu.be/hgGjpgVcxb8" target="_blank" class="btn btn-gold">🎵 Escuchar Himno en YouTube</a>
+        </div>
+        <p style="text-align:center;margin-top:18px;font-style:italic;color:#ccc;font-size:.9rem">Este himno representa la historia, la resistencia y la identidad del pueblo gitano.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:50px 20px;max-width:700px;margin:0 auto">
+      <p style="font-size:1.25rem;color:var(--marron);font-style:italic;line-height:1.9">"La cultura del pueblo gitano es diversa, viva y llena de historias que merecen ser conocidas y respetadas."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APRENDIZAJE ===== -->
+<section id="aprendizaje" class="section" style="background:#fff">
+  <h2 class="section-title">Ambientes de Aprendizaje Interculturales</h2>
+  <div style="max-width:1100px;margin:0 auto">
+
+    <div style="text-align:center;margin-bottom:40px">
+      <h3 style="color:var(--marron);font-size:1.5rem;margin-bottom:8px">✨ >> Planeaciones para el Aula << ✨</h3>
+      <p style="color:#888;font-style:italic;font-size:.95rem">Actividades cortas, dinámicas y significativas para aprender desde el respeto y la diversidad. 💜</p>
+    </div>
+
+    <!-- PLANEACIÓN 1 -->
+    <div style="background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 30px rgba(125,60,152,.15);margin-bottom:40px;border:2px solid #E8D5F5">
+      <div style="background:linear-gradient(135deg,#7D3C98,#9B59B6);padding:28px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="width:56px;height:56px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;color:#fff;flex-shrink:0">1</div>
+        <div style="flex:1">
+          <h3 style="color:#fff;font-size:1.5rem;margin-bottom:4px">🦋 La maleta viajera de Magüi</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+            <span style="background:rgba(255,255,255,.2);color:#fff;padding:4px 14px;border-radius:20px;font-size:.82rem">🎯 Reconocer identidades familiares</span>
+            <span style="background:rgba(255,255,255,.2);color:#fff;padding:4px 14px;border-radius:20px;font-size:.82rem">👶 4 a 6 años</span>
+          </div>
+        </div>
+        <img src="la maleta viajera de Magui.jpeg" alt="Maleta viajera" style="width:120px;height:90px;object-fit:cover;border-radius:12px;border:3px solid rgba(255,255,255,.4);flex-shrink:0">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+        <div style="padding:24px;border-right:1px solid #F0E0FF;border-bottom:1px solid #F0E0FF">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <span style="background:#7D3C98;color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold">🎒 INICIO · 15 min</span>
+          </div>
+          <p style="font-size:.88rem;line-height:1.75;color:#444">La maestra llega con una <strong>"maleta viajera"</strong> decorada como de Magüi. Dentro puede haber:</p>
+          <ul style="margin:8px 0 8px 16px;font-size:.85rem;color:#555;line-height:1.8">
+            <li>Pañuelos de colores</li>
+            <li>Una mariposa</li>
+            <li>Monedas de juguete</li>
+            <li>Tela brillante</li>
+            <li>Imágenes del cuento</li>
+          </ul>
+          <p style="font-size:.83rem;font-style:italic;color:#7D3C98;background:#F5EAff;padding:8px 12px;border-radius:8px">"Magüi viajó hasta nuestra aula y dejó esta maleta llena de historias…"</p>
+        </div>
+        <div style="padding:24px;border-bottom:1px solid #F0E0FF">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <span style="background:#9B59B6;color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold">👥 DESARROLLO · 25–35 min</span>
+          </div>
+          <p style="font-size:.88rem;line-height:1.75;color:#444">Cada niño saca un objeto. Preguntas mágicas:</p>
+          <ul style="margin:8px 0 12px 16px;font-size:.85rem;color:#555;line-height:1.8">
+            <li>¿Qué crees que significa?</li>
+            <li>¿Te recuerda algo de tu familia?</li>
+          </ul>
+          <p style="font-size:.88rem;line-height:1.75;color:#444">Luego leen con pequeños parte del cuento relacionado con familia, origen o cultura.</p>
+        </div>
+        <div style="padding:24px;border-right:1px solid #F0E0FF">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <span style="background:#E8D5F5;color:#7D3C98;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold">✏️ ACTIVIDAD RÁPIDA</span>
+          </div>
+          <p style="font-size:.9rem;font-weight:bold;color:#7D3C98;margin-bottom:6px">Dibujar:</p>
+          <p style="font-size:.88rem;color:#444;line-height:1.7">¿Qué guardarías tú en tu maleta de recuerdos?</p>
+        </div>
+        <div style="padding:24px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <span style="background:#FDEAEA;color:#C41E3A;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold">💜 CIERRE · 15 min</span>
+          </div>
+          <p style="font-size:.88rem;line-height:1.75;color:#444;margin-bottom:14px">Todos muestran su dibujo en círculo y comparten lo que es.</p>
+          <div style="background:#F5EAFF;border-radius:10px;padding:12px">
+            <p style="font-size:.8rem;color:#7D3C98;font-weight:bold;margin-bottom:6px">✅ ¿Por qué funciona?</p>
+            <p style="font-size:.8rem;color:#555;line-height:1.7">✔ Manipulación &nbsp;✔ Sorpresa &nbsp;✔ Juego &nbsp;✔ Movimiento &nbsp;✔ Conexión emocional</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLANEACIÓN 2 -->
+    <div style="background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 30px rgba(212,160,23,.15);margin-bottom:40px;border:2px solid #FFE5C0">
+      <div style="background:linear-gradient(135deg,#E67E22,#F39C12);padding:28px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="width:56px;height:56px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;color:#fff;flex-shrink:0">2</div>
+        <div style="flex:1">
+          <h3 style="color:#fff;font-size:1.5rem;margin-bottom:4px">🎵 Los sonidos de Paparuga</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+            <span style="background:rgba(255,255,255,.2);color:#fff;padding:4px 14px;border-radius:20px;font-size:.82rem">🎯 Música como expresión cultural</span>
+            <span style="background:rgba(255,255,255,.2);color:#fff;padding:4px 14px;border-radius:20px;font-size:.82rem">👶 4 a 7 años</span>
+          </div>
+        </div>
+        <img src="los sonidos de paparuga.jpeg" alt="Sonidos de Paparuga" style="width:120px;height:90px;object-fit:cover;border-radius:12px;border:3px solid rgba(255,255,255,.4);flex-shrink:0">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+        <div style="padding:24px;border-right:1px solid #FFE5C0;border-bottom:1px solid #FFE5C0">
+          <span style="background:#E67E22;color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">📖 INICIO · 15 min</span>
+          <p style="font-size:.88rem;line-height:1.75;color:#444">Leer una parte del cuento donde aparezca música, danza o una reunión familiar.</p>
+          <p style="font-size:.83rem;font-style:italic;color:#E67E22;background:#FFF3E0;padding:8px 12px;border-radius:8px;margin-top:10px">¿Cómo crees que suena esa fiesta en la kumpania?</p>
+        </div>
+        <div style="padding:24px;border-bottom:1px solid #FFE5C0">
+          <span style="background:#F39C12;color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">🎵 DESARROLLO · 20 min</span>
+          <p style="font-size:.88rem;line-height:1.75;color:#444">Escuchar fragmentos cortos de música gitana. Los niños:</p>
+          <ul style="margin:8px 0 8px 16px;font-size:.85rem;color:#555;line-height:1.8">
+            <li>Caminan · Giran como mariposas</li>
+            <li>Movimientos libres con pañuelos de colores</li>
+          </ul>
+          <p style="font-size:.82rem;color:#E67E22;font-style:italic">(Sin imitar ni caricaturizar)</p>
+        </div>
+        <div style="padding:24px;border-right:1px solid #FFE5C0">
+          <span style="background:#FFF3E0;color:#E67E22;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">⭐ MINI JUEGO</span>
+          <p style="font-size:.88rem;line-height:1.75;color:#444">Cuando la música pare: todos quietos como <strong style="color:#E67E22">"paparugas danzantes"</strong> 🦋</p>
+        </div>
+        <div style="padding:24px">
+          <span style="background:#FDEAEA;color:#C41E3A;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">💛 CIERRE · 15 min</span>
+          <p style="font-size:.88rem;line-height:1.75;color:#444;margin-bottom:12px">Conversamos: ¿Qué emoción sentiste con la música? ¿Qué parte fue tuya sola?</p>
+          <div style="background:#FFF3E0;border-radius:10px;padding:12px">
+            <p style="font-size:.8rem;color:#E67E22;font-weight:bold;margin-bottom:4px">✅ ¿Por qué funciona?</p>
+            <p style="font-size:.8rem;color:#555;line-height:1.7">✔ Movimiento &nbsp;✔ Expresión corporal &nbsp;✔ Atención activa &nbsp;✔ Experiencia emocional</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLANEACIÓN 3 -->
+    <div style="background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 30px rgba(39,174,96,.15);margin-bottom:40px;border:2px solid #C8F0D8">
+      <div style="background:linear-gradient(135deg,#27AE60,#2ECC71);padding:28px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="width:56px;height:56px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;color:#fff;flex-shrink:0">3</div>
+        <div style="flex:1">
+          <h3 style="color:#fff;font-size:1.5rem;margin-bottom:4px">🌐 Exploramos el glosario de la página web</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+            <span style="background:rgba(255,255,255,.2);color:#fff;padding:4px 14px;border-radius:20px;font-size:.82rem">🎯 Lengua romaní e identidad cultural</span>
+            <span style="background:rgba(255,255,255,.2);color:#fff;padding:4px 14px;border-radius:20px;font-size:.82rem">👶 5 a 8 años</span>
+          </div>
+        </div>
+        <img src="exploramos el glosario de la pagina web.jpeg" alt="Glosario web" style="width:120px;height:90px;object-fit:cover;border-radius:12px;border:3px solid rgba(255,255,255,.4);flex-shrink:0">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+        <div style="padding:24px;border-right:1px solid #C8F0D8;border-bottom:1px solid #C8F0D8">
+          <span style="background:#27AE60;color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">📖 INICIO · 5 min</span>
+          <p style="font-size:.88rem;line-height:1.75;color:#444">La maestra presenta la página web en proyector o tablet y muestra el glosario interactivo.</p>
+          <p style="font-size:.83rem;font-style:italic;color:#27AE60;background:#EAFAF1;padding:8px 12px;border-radius:8px;margin-top:10px">¿Qué creen que vamos a encontrar aquí?</p>
+        </div>
+        <div style="padding:24px;border-bottom:1px solid #C8F0D8">
+          <span style="background:#2ECC71;color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">🎧 DESARROLLO · 15–18 min</span>
+          <ol style="margin:0 0 8px 16px;font-size:.85rem;color:#555;line-height:1.9">
+            <li>Escuchamos la palabra</li>
+            <li>Observamos la imagen</li>
+            <li>Conversamos qué puede significar</li>
+            <li>Repetimos juntos la palabra</li>
+          </ol>
+          <p style="font-size:.83rem;color:#27AE60">Cada niño elige su palabra favorita del glosario y cuenta qué le llamó la atención.</p>
+        </div>
+        <div style="padding:24px;border-right:1px solid #C8F0D8">
+          <span style="background:#EAFAF1;color:#27AE60;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">✏️ ACTIVIDAD DINÁMICA</span>
+          <p style="font-size:.9rem;font-weight:bold;color:#27AE60;margin-bottom:6px">Juego "Escucha y encuentra"</p>
+          <p style="font-size:.88rem;color:#444;line-height:1.7">La maestra dice una palabra del glosario y los niños levantan la imagen o tarjeta correcta.</p>
+        </div>
+        <div style="padding:24px">
+          <span style="background:#FDEAEA;color:#C41E3A;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:bold;display:inline-block;margin-bottom:12px">💚 CIERRE · 5 min</span>
+          <p style="font-size:.88rem;line-height:1.75;color:#444;margin-bottom:12px">Cada niño comparte una palabra nueva. La maestra la escribe en el mural:</p>
+          <div style="background:#EAFAF1;border-radius:10px;padding:12px;text-align:center">
+            <p style="font-size:.95rem;color:#27AE60;font-weight:bold">💚 PALABRAS QUE NOS CONECTAN</p>
+          </div>
+        </div>
+      </div>
+      <div style="background:#EAFAF1;padding:16px 28px;border-top:2px solid #C8F0D8;text-align:center">
+        <p style="font-size:.88rem;color:#27AE60"><strong>Enfoque de todas las planeaciones:</strong> Fomentar el respeto, la escucha y la valoración de la diversidad cultural en un ambiente de colaboración. 🌿</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:10px">
+      <div class="card card-red-top">
+        <h3 style="color:var(--rojo);margin-bottom:14px">💡 Ideas Exprés para el Aula</h3>
+        <ul class="ideas-li">
+          <li>🗣️ <strong>Palabra del día en romaní</strong> — Enseña una nueva palabra cada día</li>
+          <li>🎵 <strong>Escuchar música romaní y dibujar emociones</strong> — Arte y cultura juntos</li>
+          <li>👗 <strong>Crear vestimenta con papel</strong> — Actividad creativa con traje tradicional</li>
+        </ul>
+      </div>
+      <div class="card card-red-top">
+        <h3 style="color:var(--rojo);margin-bottom:20px">👁️ Miradas para Enseñar</h3>
+        <div class="grid-2" style="gap:12px">
+          <div class="teach-item"><div style="font-size:2rem;margin-bottom:8px">🌍</div><h4 style="color:var(--rojo);margin-bottom:4px;font-size:.9rem">Respetar la diversidad</h4><p style="color:#666;font-size:.8rem">Reconocer y valorar las diferencias culturales</p></div>
+          <div class="teach-item"><div style="font-size:2rem;margin-bottom:8px">🚫</div><h4 style="color:var(--rojo);margin-bottom:4px;font-size:.9rem">Evitar estereotipos</h4><p style="color:#666;font-size:.8rem">Cuestionar prejuicios y representaciones negativas</p></div>
+          <div class="teach-item"><div style="font-size:2rem;margin-bottom:8px">👂</div><h4 style="color:var(--rojo);margin-bottom:4px;font-size:.9rem">Escuchar a los niños</h4><p style="color:#666;font-size:.8rem">Dar voz a las experiencias infantiles</p></div>
+          <div class="teach-item"><div style="font-size:2rem;margin-bottom:8px">💙</div><h4 style="color:var(--rojo);margin-bottom:4px;font-size:.9rem">Valorar otras culturas</h4><p style="color:#666;font-size:.8rem">Aprender de la riqueza de todas las culturas</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAMILIA ===== -->
+<section id="familia" class="section" style="background:linear-gradient(135deg,var(--crema),#FFE0CC)">
+  <h2 class="section-title">Creciendo en Familia</h2>
+  <p style="text-align:center;color:var(--marron);font-style:italic;margin-bottom:36px;font-size:1.05rem">Un espacio para compartir experiencias, pensamientos y sentires sobre el pueblo gitano y la interculturalidad.</p>
+
+  <div class="tabs" style="justify-content:center;margin-bottom:32px">
+    <button class="tab-btn active" onclick="tab('blog-doc',this)">👩‍🏫 Docentes</button>
+    <button class="tab-btn" onclick="tab('blog-fam',this)">👨‍👩‍👧 Familias</button>
+  </div>
+
+  <div id="tab-blog-doc" class="tab-content active">
+    <div class="card" style="max-width:700px;margin:0 auto;padding:40px">
+      <div style="font-size:3rem;margin-bottom:16px;text-align:center">👩‍🏫</div>
+      <h3 style="color:var(--rojo);margin-bottom:18px;text-align:center">Bienvenidos, docentes</h3>
+      <p style="line-height:1.9;margin-bottom:18px">Este es un espacio creado para ustedes: educadores y educadoras que creen en una enseñanza más diversa, humana y consciente.</p>
+      <p style="line-height:1.9;margin-bottom:22px">Aquí pueden compartir sus experiencias, reflexiones y estrategias relacionadas con la interculturalidad y el pueblo gitano en el aula.</p>
+      <p style="color:var(--marron);font-weight:bold;margin-bottom:14px">Los invitamos a responder alguna de estas preguntas en los comentarios:</p>
+      <ul class="ideas-li" style="margin-bottom:24px">
+        <li>💬 ¿Cómo trabajas la diversidad cultural con tus estudiantes?</li>
+        <li>💬 ¿Has abordado alguna vez la cultura del pueblo gitano en el aula? ¿Cómo fue esa experiencia?</li>
+        <li>💬 ¿Qué estrategias usas para fomentar el respeto y la empatía entre los niños y las niñas?</li>
+      </ul>
+      <p style="color:#888;font-style:italic;margin-bottom:28px;line-height:1.8">No hay respuestas correctas ni incorrectas. Cada voz cuenta y enriquece este espacio.</p>
+      <p style="text-align:center;font-style:italic;color:var(--marron);margin-bottom:28px">— Carol y Dana</p>
+      <div style="text-align:center">
+        <a href="https://memoriayvocesdelpueblogitano.blogspot.com/" target="_blank" class="btn">Ir al Blog y comentar ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-blog-fam" class="tab-content">
+    <div class="card" style="max-width:700px;margin:0 auto;padding:40px">
+      <div style="font-size:3rem;margin-bottom:16px;text-align:center">👨‍👩‍👧</div>
+      <h3 style="color:var(--rojo);margin-bottom:18px;text-align:center">Bienvenidas, familias</h3>
+      <p style="line-height:1.9;margin-bottom:18px">Este espacio es para ustedes: mamás, papás, cuidadores y cuidadoras que acompañan el crecimiento de los niños y las niñas.</p>
+      <p style="color:var(--marron);font-weight:bold;margin-bottom:14px">Los invitamos a compartir en los comentarios:</p>
+      <ul class="ideas-li" style="margin-bottom:24px">
+        <li>💬 ¿Alguna vez le has contado a tu hijo o hija sobre otras culturas? ¿Cómo reaccionó?</li>
+        <li>💬 ¿Qué significa para ti que tu hijo o hija aprenda sobre el pueblo gitano?</li>
+        <li>💬 ¿Qué preguntas te han hecho los niños sobre la diversidad cultural?</li>
+      </ul>
+      <p style="color:#888;font-style:italic;margin-bottom:28px;line-height:1.8">Su experiencia es valiosa y puede inspirar a otras familias.</p>
+      <p style="text-align:center;font-style:italic;color:var(--marron);margin-bottom:28px">— Carol y Dana</p>
+      <div style="text-align:center">
+        <a href="https://memoriayvocesdelpueblogitano.blogspot.com/" target="_blank" class="btn">Ir al Blog y comentar ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CUENTO ===== -->
+<section id="cuento" class="section" style="background:linear-gradient(135deg,var(--crema),#FFE0CC)">
+  <h2 class="section-title">Cuento</h2>
+  <div class="card cuento-card">
+    <h3 style="color:var(--rojo);font-size:1.5rem;text-align:center;margin-bottom:18px">📖 Conoce nuestro cuento: Paparuga</h3>
+    <p>Como parte de este proyecto nació <em>Paparuga: Historias que tejen identidad en la niñez gitana</em>, un libro-cuento creado para acercarnos al pueblo gitano desde sus voces, sus experiencias, sus saberes y aquellos elementos que hacen parte de su identidad cultural. A través de sus páginas, se busca abrir un espacio para conocer y valorar diferentes historias de la niñez gitana, reconociendo la importancia de preservar sus tradiciones y promover una educación intercultural basada en el respeto y el reconocimiento de la diversidad.</p>
+    <p>Este cuento fue construido como un recurso educativo que invita a niñas, niños, docentes, familias y a todas las personas interesadas a descubrir otras formas de vivir, aprender y comprender el mundo. Cada historia permite acercarse al pueblo gitano desde una mirada respetuosa, alejándose de estereotipos y dando valor a sus voces y experiencias.</p>
+    <p>Te invitamos a recorrer Paparuga y dejarte llevar por sus historias, personajes y aprendizajes. Aquí podrás visualizar y leer el cuento en formato digital.</p>
+    <a href="https://canva.link/q7nyrt987deo6fm" target="_blank" rel="noopener"><img class="cuento-cover" src="cuento-portada.png" alt="Portada del cuento El susurro de mis raíces: un relato gitano"></a>
+    <div class="cuento-links">
+      <a href="https://canva.link/q7nyrt987deo6fm" target="_blank" rel="noopener" class="btn">📖 Leer el cuento en Canva ↗</a>
+      <a href="https://unbosqueeduco-my.sharepoint.com/:b:/g/personal/dvquiroga_unbosque_edu_co/IQDKHzpd226WS4LBv4orfPYGAToLq3zSVZpZ3XC81hNbtL4?e=mV6x5v" target="_blank" rel="noopener" class="btn btn-gold">📄 El susurro de mis raíces (PDF) ↗</a>
+    </div>
+  </div>
+</section>
+
+<div id="puz-layer"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="font-size:2.5rem;margin-bottom:10px">🦋</div>
+  <h3 style="font-size:1.3rem">Paparuga: Pueblo Gitano</h3>
+  <p style="color:#aaa;margin-top:6px;font-style:italic">Porque la memoria también es un acto de resistencia</p>
+  <p style="color:#555;margin-top:20px;font-size:.82rem">© 2026 Carol &amp; Dana — Universidad El Bosque</p>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════
+   NAV
+   ══════════════════════════════════════════════ */
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let c = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop - 200) c = s.id; });
+  navAs.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + c); });
+});
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+/* ══════════════════════════════════════════════
+   TABS
+   ══════════════════════════════════════════════ */
+function tab(id, btn) {
+  const p = btn.closest('section, .modal-box, .c-card-body') || btn.parentElement.parentElement;
+  p.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  p.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const el = document.getElementById('tab-' + id);
+  if (el) el.classList.add('active');
+}
+
+/* ══════════════════════════════════════════════
+   CALENDARIO
+   ══════════════════════════════════════════════ */
+(function(){
+  const days = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const first = new Date(2026, 3, 1).getDay();
+  let h = '<div class="cal-wrap"><div class="cal-header">Abril 2026 🌸</div><div class="cal-grid">';
+  days.forEach(d => h += `<div class="cal-dn">${d}</div>`);
+  for (let i = 0; i < first; i++) h += '<div></div>';
+  for (let d = 1; d <= 30; d++) {
+    const sp = d === 8;
+    h += `<div class="cal-day${sp?' special':''}" title="${sp?'Día Internacional del Pueblo Gitano':''}">${d}${sp?'<br>🦋':''}</div>`;
+  }
+  document.getElementById('cal').innerHTML = h + '</div></div>';
+})();
+
+/* ══════════════════════════════════════════════
+   CANVAS DE DIBUJO
+   ══════════════════════════════════════════════ */
+function setupCanvas(id, colId, szId) {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let drawing = false, lx = 0, ly = 0;
+  function pos(e) {
+    const r = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return { x: (src.clientX - r.left) * canvas.width / r.width,
+             y: (src.clientY - r.top) * canvas.height / r.height };
+  }
+  function down(e) { drawing = true; const p = pos(e); lx = p.x; ly = p.y; e.preventDefault(); }
+  function move(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    const col = document.getElementById(colId), sz = document.getElementById(szId);
+    ctx.strokeStyle = col ? col.value : '#C41E3A';
+    ctx.lineWidth = sz ? +sz.value : 3;
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const p = pos(e);
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(p.x, p.y); ctx.stroke();
+    lx = p.x; ly = p.y;
+  }
+  function up() { drawing = false; }
+  canvas.addEventListener('mousedown', down);
+  canvas.addEventListener('mousemove', move);
+  canvas.addEventListener('mouseup', up);
+  canvas.addEventListener('mouseleave', up);
+  canvas.addEventListener('touchstart', down, {passive:false});
+  canvas.addEventListener('touchmove', move, {passive:false});
+  canvas.addEventListener('touchend', up);
+  requestAnimationFrame(() => { canvas.width = canvas.offsetWidth || 500; canvas.height = 140; });
+}
+['cv-t1','cv-t2','cv-t3'].forEach(id => setupCanvas(id, 'col-' + id.slice(3), 'sz-' + id.slice(3)));
+setupCanvas('cv2', 'col2', 'sz2');
+function clearCv(id) { const c = document.getElementById(id); if(c) c.getContext('2d').clearRect(0,0,c.width,c.height); }
+
+function pickEm(groupId, btn) {
+  document.querySelectorAll('#' + groupId + ' .emotion-btn').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+/* ══════════════════════════════════════════════
+   MODALES
+   ══════════════════════════════════════════════ */
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal').forEach(m =>
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+
+/* ══════════════════════════════════════════════════════════════
+   JUEGO 1 · VESTIR
+   ──────────────────────────────────────────────────────────────
+   Cada prenda se dibuja en el sistema de coordenadas NATIVO del
+   PNG de su personaje. El PNG va DENTRO del mismo <svg> que las
+   prendas, así es imposible que se desalineen a cualquier tamaño.
+
+     Magüi   -> viewBox "0 0 581 1023"
+     Gabriel -> viewBox "0 0 342 1032"
+   ══════════════════════════════════════════════════════════════ */
+
+const monedas = (y, x1, x2, n, r) => {
+  let o = '';
+  for (let i = 0; i < n; i++) {
+    const x = x1 + (x2 - x1) * (i / (n - 1));
+    o += `<circle cx="${x.toFixed(1)}" cy="${y}" r="${r}" fill="#E8C547" stroke="#A67C00" stroke-width="1.5"/>`;
+  }
+  return o;
+};
+const flores = (pts, c1, c2, r) => pts.map(([x, y]) =>
+  `<circle cx="${x}" cy="${y}" r="${r}" fill="${c1}"/><circle cx="${x}" cy="${y}" r="${(r*0.38).toFixed(1)}" fill="${c2}"/>`
+).join('');
+
+/* ═══════════ MAGÜI · viewBox 581 x 1023 ═══════════
+   hombros y420 | cintura y600 x200-380 | piernas y683 | pies y1015
+   la falda debe cubrir desde y~590 (tapa el calzón que va hasta 647)
+   la blusa desde y~400 hasta y~610 (tapa el traje que va hasta 595) */
+
+const M_FALDAS = {
+  monedas: { n:'Falda de feria con monedas', svg:
+    `<path d="M196 592 L384 592 L438 856 Q290 892 142 856 Z" fill="#9B1B30" stroke="#5E0F1D" stroke-width="4"/>
+     <path d="M196 592 L384 592 L389 634 L191 634 Z" fill="#7A1526"/>
+     ${monedas(614, 206, 374, 11, 6)}
+     ${monedas(742, 172, 408, 13, 6)}
+     <path d="M150 842 Q290 878 430 842" fill="none" stroke="#E8C547" stroke-width="5"/>
+     <path d="M158 790 Q290 826 422 790" fill="none" stroke="#E8C547" stroke-width="3"/>` },
+  bordada: { n:'Falda bordada', svg:
+    `<path d="M196 592 L384 592 L438 856 Q290 892 142 856 Z" fill="#1E7A4D" stroke="#0F4029" stroke-width="4"/>
+     ${flores([[240,660],[340,660],[290,712],[210,762],[370,762],[290,806],[178,822],[402,822],[290,858]], '#E8C547', '#C41E3A', 7)}
+     <path d="M150 842 Q290 878 430 842" fill="none" stroke="#E8C547" stroke-width="5"/>` },
+  lana: { n:'Falda de lana', svg:
+    `<path d="M196 592 L384 592 L438 856 Q290 892 142 856 Z" fill="#2E6B4F" stroke="#17392A" stroke-width="4"/>
+     <path d="M222 604 L188 862" stroke="#1D4A36" stroke-width="3" fill="none"/>
+     <path d="M290 598 L290 884" stroke="#1D4A36" stroke-width="3" fill="none"/>
+     <path d="M358 604 L392 862" stroke="#1D4A36" stroke-width="3" fill="none"/>
+     ${flores([[246,712],[334,712],[290,776],[204,806],[376,806]], '#D4A017', '#8B2500', 7)}` },
+  estampada: { n:'Falda estampada', svg:
+    `<path d="M196 592 L384 592 L438 856 Q290 892 142 856 Z" fill="#8B1A2B" stroke="#4E0E18" stroke-width="4"/>
+     ${flores([[234,640],[346,640],[290,678],[208,720],[372,720],[290,758],[182,798],[398,798],[290,838],[236,868],[344,868]], '#E8B4B8', '#D4A017', 6)}
+     <path d="M148 848 Q290 884 432 848" fill="none" stroke="#D4A017" stroke-width="5"/>` }
+};
+
+const M_BLUSAS = {
+  volantes: { n:'Blusa con volantes', svg:
+    `<path d="M214 406 Q290 388 366 406 L384 586 Q290 608 196 586 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="4"/>
+     <path d="M214 408 Q178 434 158 506 Q178 526 212 514 L220 440 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="4"/>
+     <path d="M366 408 Q402 434 422 506 Q402 526 368 514 L360 440 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="4"/>
+     <path d="M196 586 Q290 608 384 586 L389 622 Q290 648 191 622 Z" fill="#F5EAD6" stroke="#C4A882" stroke-width="3"/>
+     <path d="M264 398 Q290 424 316 398" fill="none" stroke="#8B2500" stroke-width="3"/>
+     ${flores([[256,462],[324,462],[290,502],[240,542],[340,542]], '#C41E3A', '#D4A017', 6)}` },
+  floral: { n:'Blusa bordada floral', svg:
+    `<path d="M214 406 Q290 388 366 406 L384 594 Q290 616 196 594 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="4"/>
+     <path d="M214 408 Q176 436 154 512 Q175 532 212 518 L220 440 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="4"/>
+     <path d="M366 408 Q404 436 426 512 Q405 532 368 518 L360 440 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="4"/>
+     ${flores([[248,432],[290,418],[332,432],[234,478],[290,462],[346,478],[248,524],[332,524],[290,508],[266,566],[314,566]], '#C41E3A', '#1E7A4D', 6)}
+     <path d="M196 594 Q290 616 384 594" fill="none" stroke="#C41E3A" stroke-width="5"/>` },
+  abullonadas: { n:'Blusa de mangas abullonadas', svg:
+    `<path d="M216 408 Q290 390 364 408 L382 592 Q290 614 198 592 Z" fill="#FDF7EC" stroke="#C4A882" stroke-width="4"/>
+     <ellipse cx="176" cy="474" rx="38" ry="48" fill="#FDF7EC" stroke="#C4A882" stroke-width="4"/>
+     <ellipse cx="404" cy="474" rx="38" ry="48" fill="#FDF7EC" stroke="#C4A882" stroke-width="4"/>
+     <path d="M146 514 Q176 532 206 514" fill="none" stroke="#C4A882" stroke-width="3"/>
+     <path d="M374 514 Q404 532 434 514" fill="none" stroke="#C4A882" stroke-width="3"/>
+     ${flores([[258,450],[322,450],[290,494],[240,548],[340,548]], '#D4A017', '#8B2500', 6)}` }
+};
+
+const M_MANTONES = {
+  verde: { n:'Mantón verde', svg:
+    `<path d="M208 418 Q290 404 372 418 L336 480 Q290 508 244 480 Z" fill="#1E7A4D" stroke="#0F4029" stroke-width="3"/>
+     <path d="M244 480 Q290 508 336 480 L314 532 Q290 550 266 532 Z" fill="#175F3C" stroke="#0F4029" stroke-width="3"/>
+     ${flores([[254,440],[326,440],[290,468],[274,504],[306,504]], '#D4A017', '#FBF3E2', 6)}
+     <path d="M266 532 L262 556 M277 538 L273 562 M290 542 L290 566 M303 538 L307 562 M314 532 L318 556" stroke="#D4A017" stroke-width="3"/>` },
+  naranja: { n:'Mantón naranja', svg:
+    `<path d="M208 418 Q290 404 372 418 L336 480 Q290 508 244 480 Z" fill="#C87326" stroke="#7A4310" stroke-width="3"/>
+     <path d="M244 480 Q290 508 336 480 L314 532 Q290 550 266 532 Z" fill="#B0631C" stroke="#7A4310" stroke-width="3"/>
+     ${flores([[254,440],[326,440],[290,468],[274,504],[306,504]], '#FBF3E2', '#8B2500', 6)}
+     <path d="M266 532 L262 556 M277 538 L273 562 M290 542 L290 566 M303 538 L307 562 M314 532 L318 556" stroke="#8B4513" stroke-width="3"/>` }
+};
+
+const M_PANUELOS = {
+  rojo: { n:'Pañuelo rojo (diklo)', svg:
+    `<path d="M148 128 Q290 56 432 128 Q438 166 420 186 Q290 138 160 186 Q142 166 148 128 Z" fill="#C41E3A" stroke="#7A1526" stroke-width="3"/>
+     ${flores([[204,132],[376,132],[290,104]], '#E8C547', '#FBF3E2', 8)}
+     <path d="M420 182 Q462 210 450 258 Q426 230 406 202 Z" fill="#9B1B30" stroke="#7A1526" stroke-width="3"/>` },
+  floreado: { n:'Pañuelo floreado', svg:
+    `<path d="M148 128 Q290 56 432 128 Q438 166 420 186 Q290 138 160 186 Q142 166 148 128 Z" fill="#1B4F72" stroke="#0E2C42" stroke-width="3"/>
+     ${flores([[190,146],[290,96],[390,146],[236,172],[344,172]], '#E8C547', '#C41E3A', 8)}
+     <path d="M420 182 Q462 210 450 258 Q426 230 406 202 Z" fill="#153D5A" stroke="#0E2C42" stroke-width="3"/>` }
+};
+
+const M_CALZADO = {
+  bordados: { n:'Botines bordados', svg:
+    `<path d="M166 916 L234 916 L236 984 Q236 1008 200 1010 Q152 1010 146 992 Q144 966 158 954 Z" fill="#B8763A" stroke="#6B3A2A" stroke-width="3"/>
+     <path d="M344 916 L412 916 L420 954 Q434 966 432 992 Q426 1010 378 1010 Q342 1008 342 984 Z" fill="#B8763A" stroke="#6B3A2A" stroke-width="3"/>
+     ${flores([[196,948],[382,948]], '#E8C547', '#8B2500', 9)}
+     <path d="M146 998 Q192 1014 236 1004 M342 1004 Q386 1014 432 998" stroke="#5A2E20" stroke-width="9" fill="none" stroke-linecap="round"/>` },
+  viaje: { n:'Botas de viaje', svg:
+    `<path d="M164 872 L236 872 L238 984 Q238 1008 200 1010 Q150 1010 144 992 Q142 964 158 952 Z" fill="#4E3B2A" stroke="#2C2018" stroke-width="3"/>
+     <path d="M342 872 L414 872 L420 952 Q436 964 434 992 Q428 1010 378 1010 Q340 1008 340 984 Z" fill="#4E3B2A" stroke="#2C2018" stroke-width="3"/>
+     <path d="M162 902 L236 902 M342 902 L416 902" stroke="#2C2018" stroke-width="3"/>
+     <path d="M144 998 Q192 1014 238 1004 M340 1004 Q386 1014 434 998" stroke="#1A1410" stroke-width="9" fill="none" stroke-linecap="round"/>` },
+  espinilleras: { n:'Espinilleras tradicionales', svg:
+    `<path d="M166 856 L234 856 L236 984 Q236 1008 200 1010 Q152 1010 146 992 Q144 966 158 954 Z" fill="#F2E7D5" stroke="#A8946E" stroke-width="3"/>
+     <path d="M344 856 L412 856 L420 954 Q434 966 432 992 Q426 1010 378 1010 Q342 1008 342 984 Z" fill="#F2E7D5" stroke="#A8946E" stroke-width="3"/>
+     <path d="M170 882 L232 882 M170 912 L232 912 M170 942 L234 942" stroke="#A8946E" stroke-width="2.5"/>
+     <path d="M346 882 L408 882 M346 912 L412 912 M346 942 L418 942" stroke="#A8946E" stroke-width="2.5"/>
+     <path d="M146 998 Q192 1014 236 1004 M342 1004 Q386 1014 432 998" stroke="#8B5A3C" stroke-width="9" fill="none" stroke-linecap="round"/>` }
+};
+
+/* ═══════════ GABRIEL · viewBox 342 x 1032 ═══════════
+   hombros y400 x81-257 | cintura y620 x80-258 | piernas y705 | pies y1022
+   camisa: y 390 -> 640 (tapa camiseta que va hasta 591)
+   pantalón: y 610 -> 1000 (tapa short que va hasta 667) */
+
+const G_CAMISAS = {
+  lino: { n:'Camisa de lino', svg:
+    `<path d="M96 392 Q169 374 242 392 L252 640 Q169 662 86 640 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="3.5"/>
+     <path d="M96 394 Q60 420 44 500 Q60 520 92 508 L100 428 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="3.5"/>
+     <path d="M242 394 Q278 420 294 500 Q278 520 246 508 L238 428 Z" fill="#FBF3E2" stroke="#C4A882" stroke-width="3.5"/>
+     <path d="M144 384 L169 428 L194 384" fill="none" stroke="#C4A882" stroke-width="3"/>
+     <path d="M169 428 L169 640" stroke="#C4A882" stroke-width="2"/>` },
+  bordada_azul: { n:'Camisa bordada azul', svg:
+    `<path d="M96 392 Q169 374 242 392 L252 640 Q169 662 86 640 Z" fill="#2E5C8A" stroke="#16324D" stroke-width="3.5"/>
+     <path d="M96 394 Q60 420 44 500 Q60 520 92 508 L100 428 Z" fill="#2E5C8A" stroke="#16324D" stroke-width="3.5"/>
+     <path d="M242 394 Q278 420 294 500 Q278 520 246 508 L238 428 Z" fill="#2E5C8A" stroke="#16324D" stroke-width="3.5"/>
+     <path d="M144 384 L169 428 L194 384" fill="none" stroke="#16324D" stroke-width="3"/>
+     <path d="M141 436 L141 628 M197 436 L197 628" stroke="#E8C547" stroke-width="2.5"/>
+     ${flores([[169,462],[169,520],[169,578]], '#E8C547', '#FBF3E2', 6)}` },
+  roja: { n:'Camisa roja', svg:
+    `<path d="M96 392 Q169 374 242 392 L252 640 Q169 662 86 640 Z" fill="#B02436" stroke="#5E0F1D" stroke-width="3.5"/>
+     <path d="M96 394 Q60 420 44 500 Q60 520 92 508 L100 428 Z" fill="#B02436" stroke="#5E0F1D" stroke-width="3.5"/>
+     <path d="M242 394 Q278 420 294 500 Q278 520 246 508 L238 428 Z" fill="#B02436" stroke="#5E0F1D" stroke-width="3.5"/>
+     <path d="M144 384 L169 428 L194 384" fill="none" stroke="#5E0F1D" stroke-width="3"/>
+     <path d="M150 436 L150 634 M188 436 L188 634" stroke="#8E1B2B" stroke-width="3"/>
+     <circle cx="169" cy="466" r="4" fill="#E8C547"/><circle cx="169" cy="520" r="4" fill="#E8C547"/>
+     <circle cx="169" cy="574" r="4" fill="#E8C547"/><circle cx="169" cy="620" r="4" fill="#E8C547"/>` },
+  verde: { n:'Camisa verde', svg:
+    `<path d="M96 392 Q169 374 242 392 L252 640 Q169 662 86 640 Z" fill="#2A7A4B" stroke="#123D26" stroke-width="3.5"/>
+     <path d="M96 394 Q60 420 44 500 Q60 520 92 508 L100 428 Z" fill="#2A7A4B" stroke="#123D26" stroke-width="3.5"/>
+     <path d="M242 394 Q278 420 294 500 Q278 520 246 508 L238 428 Z" fill="#2A7A4B" stroke="#123D26" stroke-width="3.5"/>
+     <path d="M144 384 L169 428 L194 384" fill="none" stroke="#123D26" stroke-width="3"/>
+     ${flores([[132,468],[206,468],[169,516],[132,566],[206,566]], '#E8C547', '#FBF3E2', 6)}
+     <path d="M52 494 Q68 508 88 498 M250 498 Q270 508 286 494" fill="none" stroke="#E8C547" stroke-width="2.5"/>` }
+};
+
+const G_CHALECOS = {
+  terciopelo: { n:'Chaleco de terciopelo', svg:
+    `<path d="M100 398 L138 390 L169 442 L200 390 L238 398 L248 636 Q169 656 90 636 Z" fill="#8E1B2B" stroke="#4E0E18" stroke-width="3.5"/>
+     <path d="M138 390 L169 442 L200 390" fill="#6E1522"/>
+     <path d="M136 486 L202 486 M136 522 L202 522 M136 558 L202 558 M136 594 L202 594" stroke="#E8C547" stroke-width="3"/>
+     <circle cx="136" cy="486" r="4" fill="#E8C547"/><circle cx="202" cy="486" r="4" fill="#E8C547"/>
+     <circle cx="136" cy="522" r="4" fill="#E8C547"/><circle cx="202" cy="522" r="4" fill="#E8C547"/>
+     <circle cx="136" cy="558" r="4" fill="#E8C547"/><circle cx="202" cy="558" r="4" fill="#E8C547"/>
+     <circle cx="136" cy="594" r="4" fill="#E8C547"/><circle cx="202" cy="594" r="4" fill="#E8C547"/>` },
+  brocado: { n:'Chaleco de brocado', svg:
+    `<path d="M100 398 L138 390 L169 442 L200 390 L238 398 L248 636 Q169 656 90 636 Z" fill="#3E4A6B" stroke="#1E2438" stroke-width="3.5"/>
+     <path d="M138 390 L169 442 L200 390" fill="#2C3550"/>
+     ${flores([[132,488],[206,488],[169,530],[132,572],[206,572],[169,614]], '#C89B3C', '#8B6914', 6)}
+     <path d="M104 434 L104 628 M234 434 L234 628" stroke="#C89B3C" stroke-width="2.5"/>` },
+  verde_bordado: { n:'Chaleco verde bordado', svg:
+    `<path d="M100 398 L138 390 L169 442 L200 390 L238 398 L248 636 Q169 656 90 636 Z" fill="#1F5C3A" stroke="#0D2B1B" stroke-width="3.5"/>
+     <path d="M138 390 L169 442 L200 390" fill="#164429"/>
+     ${flores([[134,490],[204,490],[169,532],[134,574],[204,574],[169,616]], '#E8C547', '#FBF3E2', 6)}
+     <path d="M96 424 Q169 408 242 424" fill="none" stroke="#E8C547" stroke-width="3"/>` },
+  negro: { n:'Chaleco negro', svg:
+    `<path d="M100 398 L138 390 L169 442 L200 390 L238 398 L248 636 Q169 656 90 636 Z" fill="#2B2B30" stroke="#131316" stroke-width="3.5"/>
+     <path d="M138 390 L169 442 L200 390" fill="#1C1C20"/>
+     <circle cx="169" cy="500" r="5" fill="#8A8A92"/>
+     <circle cx="169" cy="546" r="5" fill="#8A8A92"/>
+     <circle cx="169" cy="592" r="5" fill="#8A8A92"/>` }
+};
+
+const G_PANTALONES = {
+  ancho: { n:'Pantalón ancho tradicional', svg:
+    `<path d="M78 612 L260 612 L272 1002 L186 1002 L169 748 L152 1002 L66 1002 Z" fill="#4A3B2A" stroke="#241C13" stroke-width="3.5"/>
+     <path d="M80 646 L258 646" stroke="#241C13" stroke-width="3"/>
+     <path d="M108 658 L124 1002 M230 658 L214 1002" stroke="#5E4C36" stroke-width="2.5" fill="none"/>` },
+  azul: { n:'Pantalón azul', svg:
+    `<path d="M80 612 L258 612 L268 1002 L186 1002 L169 748 L152 1002 L70 1002 Z" fill="#2B3A5C" stroke="#141B2C" stroke-width="3.5"/>
+     <path d="M82 646 L256 646" stroke="#141B2C" stroke-width="3"/>
+     <path d="M110 656 L126 1002 M228 656 L212 1002" stroke="#3E5075" stroke-width="2.5" fill="none"/>` },
+  baile: { n:'Pantalón de baile', svg:
+    `<path d="M80 612 L258 612 L268 1002 L186 1002 L169 748 L152 1002 L70 1002 Z" fill="#8B3A1E" stroke="#48190B" stroke-width="3.5"/>
+     <path d="M82 646 L256 646" stroke="#48190B" stroke-width="3"/>
+     <path d="M92 656 L76 1002 M246 656 L262 1002" stroke="#E8C547" stroke-width="3.5" fill="none"/>
+     <path d="M114 656 L130 1002 M224 656 L208 1002" stroke="#A85030" stroke-width="2" fill="none"/>` }
+};
+
+const G_SOMBREROS = {
+  textil: { n:'Gorra textil', svg:
+    `<path d="M36 108 Q169 18 302 108 Q308 140 288 156 Q169 112 50 156 Q30 140 36 108 Z" fill="#5E4C36" stroke="#2E2419" stroke-width="3"/>
+     <path d="M288 148 Q352 160 368 190 Q306 204 276 176 Z" fill="#4A3B2A" stroke="#2E2419" stroke-width="3"/>
+     <path d="M80 84 Q169 42 258 84" fill="none" stroke="#8A7355" stroke-width="3"/>
+     <path d="M36 112 Q169 68 302 112" fill="none" stroke="#3E3226" stroke-width="2.5"/>` },
+  fieltro: { n:'Sombrero de fieltro', svg:
+    `<ellipse cx="169" cy="140" rx="168" ry="30" fill="#3E3226" stroke="#221A11" stroke-width="3"/>
+     <path d="M62 142 Q54 14 169 4 Q284 14 276 142 Z" fill="#4A3B2A" stroke="#221A11" stroke-width="3"/>
+     <path d="M62 104 Q169 78 276 104 L276 136 Q169 108 62 136 Z" fill="#8B1A2B" stroke="#4E0E18" stroke-width="2.5"/>
+     <ellipse cx="169" cy="140" rx="168" ry="30" fill="none" stroke="#221A11" stroke-width="3"/>` }
+};
+
+const G_CALZADO = {
+  altas: { n:'Botas altas', svg:
+    `<path d="M62 856 L130 856 L132 990 Q132 1016 96 1018 Q46 1018 40 998 Q38 978 52 964 L58 900 Z" fill="#6B4A2A" stroke="#33220F" stroke-width="3"/>
+     <path d="M212 856 L280 856 L284 900 L290 964 Q304 978 302 998 Q296 1018 246 1018 Q210 1016 210 990 Z" fill="#6B4A2A" stroke="#33220F" stroke-width="3"/>
+     <path d="M60 892 L130 892 M212 892 L282 892" stroke="#33220F" stroke-width="3"/>
+     <path d="M40 1006 Q88 1022 132 1010 M210 1010 Q254 1022 302 1006" stroke="#22160A" stroke-width="9" fill="none" stroke-linecap="round"/>` },
+  flecos: { n:'Zapatos con flecos', svg:
+    `<path d="M56 940 L132 940 L134 990 Q134 1016 96 1018 Q44 1018 38 998 Q36 972 52 958 Z" fill="#A0703E" stroke="#5A3D1E" stroke-width="3"/>
+     <path d="M210 940 L286 940 L290 958 Q306 972 304 998 Q298 1018 246 1018 Q208 1016 208 990 Z" fill="#A0703E" stroke="#5A3D1E" stroke-width="3"/>
+     <path d="M58 954 L58 980 M80 952 L80 978 M102 952 L102 978 M124 954 L124 980" stroke="#5A3D1E" stroke-width="3"/>
+     <path d="M218 954 L218 980 M240 952 L240 978 M262 952 L262 978 M284 954 L284 980" stroke="#5A3D1E" stroke-width="3"/>
+     <path d="M38 1006 Q88 1022 134 1010 M208 1010 Q254 1022 304 1006" stroke="#3F2A14" stroke-width="9" fill="none" stroke-linecap="round"/>` },
+  cortas: { n:'Botas cortas', svg:
+    `<path d="M56 918 L132 918 L134 990 Q134 1016 96 1018 Q44 1018 38 998 Q36 970 52 956 Z" fill="#8A6440" stroke="#4A3320" stroke-width="3"/>
+     <path d="M210 918 L286 918 L290 956 Q306 970 304 998 Q298 1018 246 1018 Q208 1016 208 990 Z" fill="#8A6440" stroke="#4A3320" stroke-width="3"/>
+     <path d="M56 936 L132 936 M210 936 L286 936" stroke="#4A3320" stroke-width="2.5"/>
+     <path d="M38 1006 Q88 1022 134 1010 M208 1010 Q254 1022 304 1006" stroke="#33220F" stroke-width="9" fill="none" stroke-linecap="round"/>` }
+};
+
+/* ═══════════ CONFIGURACIÓN ═══════════ */
+const CHARS = {
+  magui: {
+    nombre: 'Magüi',
+    img: 'magui.png',
+    vb: '0 0 581 1023',
+    cats: [
+      { id:'falda', thumb:'120 570 340 340',   label:'Falda',   req:true,  items:M_FALDAS },
+      { id:'blusa', thumb:'140 380 300 260',   label:'Blusa',   req:true,  items:M_BLUSAS },
+      { id:'calzado', thumb:'130 845 320 180', label:'Calzado', req:true,  items:M_CALZADO },
+      { id:'manton', thumb:'190 400 200 180',  label:'Mantón',  req:false, items:M_MANTONES },
+      { id:'panuelo', thumb:'130 50 320 220', label:'Pañuelo', req:false, items:M_PANUELOS }
+    ],
+    orden: ['calzado','falda','blusa','manton','panuelo'],
+    notas: {
+      falda:   'Las faldas amplias y largas son una de las prendas más reconocidas de las mujeres rromníes. Las monedas cosidas no son solo adorno: también han funcionado como un ahorro familiar que se lleva puesto.',
+      blusa:   'Muchas mujeres rromníes confeccionan sus propias blusas. Los bordados varían según la familia y el linaje (vitsa).',
+      calzado: 'El calzado acompañaba trayectorias largas. Los botines bordados se usaban en celebraciones; las botas, en los viajes.',
+      manton:  'El mantón se lleva sobre los hombros. Es una prenda de uso cotidiano y también festivo.',
+      panuelo: 'En varias comunidades rromníes, el pañuelo en la cabeza (diklo) indica que la mujer es casada. No todas lo usan: las costumbres cambian entre familias.'
+    }
+  },
+  gabriel: {
+    nombre: 'Gabriel',
+    img: 'gabriel.png',
+    vb: '0 0 342 1032',
+    cats: [
+      { id:'camisa', thumb:'35 370 270 290',   label:'Camisa',   req:true,  items:G_CAMISAS },
+      { id:'pantalon', thumb:'55 600 230 420', label:'Pantalón', req:true,  items:G_PANTALONES },
+      { id:'calzado', thumb:'30 880 270 140',  label:'Calzado',  req:true,  items:G_CALZADO },
+      { id:'chaleco', thumb:'80 380 180 270',  label:'Chaleco',  req:false, items:G_CHALECOS },
+      { id:'sombrero', thumb:'-10 0 380 190', label:'Sombrero', req:false, items:G_SOMBREROS }
+    ],
+    orden: ['calzado','pantalon','camisa','chaleco','sombrero'],
+    notas: {
+      camisa:   'Las camisas amplias, a menudo bordadas, forman parte del traje masculino rrom. El color y el bordado cambian según la ocasión y la familia.',
+      pantalon: 'Los pantalones anchos permitían moverse con comodidad en los oficios tradicionales, como el trabajo del cobre.',
+      calzado:  'Las botas resistentes acompañaban los desplazamientos entre kumpanias.',
+      chaleco:  'El chaleco es una prenda distintiva del traje masculino. Los botones metálicos y los bordados marcan su carácter festivo.',
+      sombrero: 'El sombrero forma parte del atuendo de los hombres rrom en muchas comunidades, especialmente en celebraciones.'
+    }
+  }
+};
+
+/* ═══════════ LÓGICA ═══════════ */
+let cur = null, outfit = {}, activeCat = null;
+
+function dressShow(id) {
+  document.querySelectorAll('.dress-screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+/* Construye un SVG completo: cuerpo + prendas, todo en el mismo
+   sistema de coordenadas. Imposible que se desalineen. */
+function buildFigure(charKey, outfitObj, extraClass) {
+  const c = CHARS[charKey];
+  let layers = '';
+  c.orden.forEach(catId => {
+    const key = outfitObj[catId];
+    if (!key) return;
+    const cat = c.cats.find(x => x.id === catId);
+    layers += cat.items[key].svg;
+  });
+  const [, , vw, vh] = c.vb.split(' ');
+  return `<svg class="figure ${extraClass||''}" viewBox="${c.vb}"
+               xmlns="http://www.w3.org/2000/svg"
+               preserveAspectRatio="xMidYMax meet">
+            <image href="${c.img}" x="0" y="0" width="${vw}" height="${vh}"/>
+            ${layers}
+          </svg>`;
+}
+
+function startDress(who) {
+  cur = who;
+  outfit = {};
+  activeCat = CHARS[who].cats[0].id;
+  document.getElementById('panel-title').textContent = 'Viste a ' + CHARS[who].nombre;
+  renderCats(); renderOpts(); renderDoll(); updateProgress();
+  dressShow('s-game');
+}
+
+function renderCats() {
+  document.getElementById('cats').innerHTML = CHARS[cur].cats.map(cat => {
+    const done = outfit[cat.id] ? ' done' : '';
+    const act  = cat.id === activeCat ? ' active' : '';
+    const opt  = cat.req ? '' : ' <small style="opacity:.6">(opcional)</small>';
+    return `<button class="cat-btn${act}${done}" onclick="pickCat('${cat.id}')">${cat.label}${opt}</button>`;
+  }).join('');
+}
+
+function pickCat(id) { activeCat = id; renderCats(); renderOpts(); }
+
+/* La miniatura muestra la prenda recortada a su propia caja,
+   no al cuerpo entero: así se ve grande y clara. */
+function renderOpts() {
+  const c = CHARS[cur];
+  const cat = c.cats.find(x => x.id === activeCat);
+  document.getElementById('opts').innerHTML = Object.entries(cat.items).map(([k, v]) => {
+    const sel = outfit[activeCat] === k ? ' sel' : '';
+    const box = cat.thumb || c.vb;
+    return `<div class="opt${sel}" onclick="pickItem('${activeCat}','${k}')">
+              <svg viewBox="${box}" xmlns="http://www.w3.org/2000/svg"
+                   preserveAspectRatio="xMidYMid meet">${v.svg}</svg>
+              <span>${v.n}</span>
+            </div>`;
+  }).join('');
+  document.getElementById('note').innerHTML = c.notas[activeCat]
+    ? `<strong>¿Sabías?</strong> ${c.notas[activeCat]}` : '';
+}
+
+function pickItem(catId, key) {
+  if (outfit[catId] === key) delete outfit[catId];
+  else outfit[catId] = key;
+  renderCats(); renderOpts(); renderDoll(); updateProgress();
+}
+
+function renderDoll() {
+  document.getElementById('doll').innerHTML = buildFigure(cur, outfit);
+}
+
+function updateProgress() {
+  const req = CHARS[cur].cats.filter(x => x.req);
+  const hechas = req.filter(x => outfit[x.id]).length;
+  document.getElementById('pfill').style.width = (hechas / req.length * 100) + '%';
+  document.getElementById('btn-done').disabled = hechas < req.length;
+}
+
+function resetOutfit() { outfit = {}; renderCats(); renderOpts(); renderDoll(); updateProgress(); }
+
+const COMPAS = [
+  { e:'🧒🏽', n:'Wayuu' },
+  { e:'👧🏿', n:'Afrocolombiana' },
+  { e:'🧒🏻', n:'Campesino' },
+  { e:'👦🏽', n:'Emberá' }
+];
+
+function goSchool() {
+  const c = CHARS[cur];
+  document.getElementById('final-name').textContent = c.nombre;
+  const kids = document.getElementById('final-kids');
+  const mk = k => `<div class="classmate"><div>${k.e}</div><small>${k.n}</small></div>`;
+  kids.innerHTML =
+    mk(COMPAS[0]) + mk(COMPAS[1]) +
+    `<div class="final-doll">${buildFigure(cur, outfit)}</div>` +
+    mk(COMPAS[2]) + mk(COMPAS[3]);
+  dressShow('s-final');
+}
+
+/* ══════════════════════════════════════════════════════════════
+   JUEGO 3 · ROMPECABEZAS
+   ──────────────────────────────────────────────────────────────
+   Rompecabezas real de 6 piezas (3x2) con lengüetas.
+   Se arrastran desde la bandeja hasta el tablero y encajan solas
+   cuando quedan cerca de su sitio (tolerancia de 45px).
+
+   Funciona con mouse y con dedo (touch).
+
+   Cada pieza es un <svg> con la imagen recortada por un <clipPath>
+   que tiene la forma real de la pieza.
+   ══════════════════════════════════════════════════════════════ */
+
+const PUZ_PATHS = [
+  { r:0, c:0, d:'M 0 0 L 300 0 L 300 114.0 C 336.3 96.0 366.0 102.0 366.0 150.0 C 366.0 198.0 336.3 204.0 300 186.0 L 300 300 L 186.0 300 C 204.0 336.3 198.0 366.0 150.0 366.0 C 102.0 366.0 96.0 336.3 114.0 300 L 0 300 L 0 0 Z' },
+  { r:0, c:1, d:'M 300 0 L 600 0 L 600 114.0 C 563.7 96.0 534.0 102.0 534.0 150.0 C 534.0 198.0 563.7 204.0 600 186.0 L 600 300 L 486.0 300 C 504.0 263.7 498.0 234.0 450.0 234.0 C 402.0 234.0 396.0 263.7 414.0 300 L 300 300 L 300 186.0 C 336.3 204.0 366.0 198.0 366.0 150.0 C 366.0 102.0 336.3 96.0 300 114.0 L 300 0 Z' },
+  { r:0, c:2, d:'M 600 0 L 900 0 L 900 300 L 786.0 300 C 804.0 336.3 798.0 366.0 750.0 366.0 C 702.0 366.0 696.0 336.3 714.0 300 L 600 300 L 600 186.0 C 563.7 204.0 534.0 198.0 534.0 150.0 C 534.0 102.0 563.7 96.0 600 114.0 L 600 0 Z' },
+  { r:1, c:0, d:'M 0 300 L 114.0 300 C 96.0 336.3 102.0 366.0 150.0 366.0 C 198.0 366.0 204.0 336.3 186.0 300 L 300 300 L 300 414.0 C 263.7 396.0 234.0 402.0 234.0 450.0 C 234.0 498.0 263.7 504.0 300 486.0 L 300 600 L 0 600 L 0 300 Z' },
+  { r:1, c:1, d:'M 300 300 L 414.0 300 C 396.0 263.7 402.0 234.0 450.0 234.0 C 498.0 234.0 504.0 263.7 486.0 300 L 600 300 L 600 414.0 C 636.3 396.0 666.0 402.0 666.0 450.0 C 666.0 498.0 636.3 504.0 600 486.0 L 600 600 L 300 600 L 300 486.0 C 263.7 504.0 234.0 498.0 234.0 450.0 C 234.0 402.0 263.7 396.0 300 414.0 L 300 300 Z' },
+  { r:1, c:2, d:'M 600 300 L 714.0 300 C 696.0 336.3 702.0 366.0 750.0 366.0 C 798.0 366.0 804.0 336.3 786.0 300 L 900 300 L 900 600 L 600 600 L 600 486.0 C 636.3 504.0 666.0 498.0 666.0 450.0 C 666.0 402.0 636.3 396.0 600 414.0 L 600 300 Z' },
+];
+
+
+const PUZ_W = 900, PUZ_H = 600;      // tamaño del dibujo original
+const PUZ_COLS = 3, PUZ_ROWS = 2;
+const PW = PUZ_W / PUZ_COLS, PH = PUZ_H / PUZ_ROWS;
+const SNAP = 45;                      // tolerancia para encajar (px de pantalla)
+
+const PUZ_IMGS = {
+  'puz-campamento.png': 'La kumpania',
+  'puz-bandera.png':    'Bandera del pueblo Rrom',
+  'puz-ninos.png':      'Magüi y Gabriel'
+};
+
+let puzImg = '', puzPlaced = 0, puzScale = 1;
+let drag = null;   // { el, idx, offX, offY }
+
+function initPuzzle() {
+  const sel = document.getElementById('puz-img');
+  if (!sel.options.length) {
+    sel.innerHTML = Object.entries(PUZ_IMGS)
+      .map(([f, n]) => `<option value="${f}">${n}</option>`).join('');
+  }
+  puzImg = sel.value;
+  puzPlaced = 0;
+
+  const board = document.getElementById('puz-board');
+  const tray  = document.getElementById('puz-tray');
+  board.innerHTML = '';
+  tray.innerHTML  = '';
+  document.getElementById('puz-win').style.display = 'none';
+  document.getElementById('puz-count').textContent = `0 de ${PUZ_PATHS.length} piezas`;
+  document.getElementById('puz-preview').innerHTML = `<img src="${puzImg}" alt="Imagen completa">`;
+
+  // escala: el tablero se adapta al ancho disponible
+  const avail = board.clientWidth || 480;
+  puzScale = Math.min(1, avail / PUZ_W);
+  board.style.height = (PUZ_H * puzScale) + 'px';
+
+  // silueta guía de cada pieza en el tablero
+  PUZ_PATHS.forEach((p, i) => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    g.setAttribute('class', 'puz-slot');
+    g.setAttribute('viewBox', `0 0 ${PUZ_W} ${PUZ_H}`);
+    g.innerHTML = `<path d="${p.d}" fill="#EFE3D2" stroke="#D8C4AC" stroke-width="3"/>`;
+    board.appendChild(g);
+  });
+
+  // piezas barajadas en la bandeja
+  const order = [...PUZ_PATHS.keys()].sort(() => Math.random() - 0.5);
+  order.forEach(i => tray.appendChild(makePiece(i)));
+}
+
+function makePiece(i) {
+  const p = PUZ_PATHS[i];
+  const el = document.createElement('div');
+  el.className = 'puz-piece';
+  el.dataset.idx = i;
+
+  // caja de la pieza con margen para las lengüetas
+  const M = PW * 0.24;
+  const bx = p.c * PW - M, by = p.r * PH - M;
+  const bw = PW + M * 2, bh = PH + M * 2;
+
+  el.dataset.bw = bw; el.dataset.bh = bh;
+  el.innerHTML =
+    `<svg viewBox="${bx} ${by} ${bw} ${bh}" xmlns="http://www.w3.org/2000/svg">
+       <defs>
+         <clipPath id="cp-${i}"><path d="${p.d}"/></clipPath>
+         <filter id="sh-${i}" x="-20%" y="-20%" width="140%" height="140%">
+           <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity=".35"/>
+         </filter>
+       </defs>
+       <g filter="url(#sh-${i})">
+         <image href="${puzImg}" x="0" y="0" width="${PUZ_W}" height="${PUZ_H}"
+                clip-path="url(#cp-${i})"/>
+         <path d="${p.d}" fill="none" stroke="rgba(0,0,0,.45)" stroke-width="2.5"/>
+       </g>
+     </svg>`;
+
+  el.addEventListener('mousedown', e => startDrag(e, el));
+  el.addEventListener('touchstart', e => startDrag(e, el), {passive:false});
+  return el;
+}
+
+function startDrag(e, el) {
+  if (el.classList.contains('locked')) return;
+  e.preventDefault();
+  const pt = e.touches ? e.touches[0] : e;
+  const r = el.getBoundingClientRect();
+
+  // sacar de la bandeja y pasar a capa flotante manteniendo posición
+  // tamaño que tendrá al encajar en el tablero
+  const tw = +el.dataset.bw * puzScale, th = +el.dataset.bh * puzScale;
+  // el punto de agarre se mantiene proporcional al crecer la pieza
+  const fx = (pt.clientX - r.left) / r.width;
+  const fy = (pt.clientY - r.top)  / r.height;
+
+  drag = { el, idx: +el.dataset.idx, offX: fx * tw, offY: fy * th };
+  el.classList.add('dragging');
+  el.style.width  = tw + 'px';
+  el.style.height = th + 'px';
+  document.getElementById('puz-layer').appendChild(el);
+  el.style.left = (pt.clientX - drag.offX) + 'px';
+  el.style.top  = (pt.clientY - drag.offY) + 'px';
+}
+
+function moveDrag(e) {
+  if (!drag) return;
+  e.preventDefault();
+  const pt = e.touches ? e.touches[0] : e;
+  drag.el.style.left = (pt.clientX - drag.offX) + 'px';
+  drag.el.style.top  = (pt.clientY - drag.offY) + 'px';
+}
+
+function endDrag() {
+  if (!drag) return;
+  const { el, idx } = drag;
+  const p = PUZ_PATHS[idx];
+  const board = document.getElementById('puz-board');
+  const br = board.getBoundingClientRect();
+  const r  = el.getBoundingClientRect();
+
+  // dónde debería estar esta pieza dentro del tablero
+  const M = PW * 0.24;
+  const tx = br.left + (p.c * PW - M) * puzScale;
+  const ty = br.top  + (p.r * PH - M) * puzScale;
+
+  const dist = Math.hypot(r.left - tx, r.top - ty);
+
+  if (dist < SNAP) {
+    // encaja
+    el.classList.remove('dragging');
+    el.classList.add('locked');
+    el.style.width  = (+el.dataset.bw * puzScale) + 'px';
+    el.style.height = (+el.dataset.bh * puzScale) + 'px';
+    el.style.left = ((p.c * PW - M) * puzScale) + 'px';
+    el.style.top  = ((p.r * PH - M) * puzScale) + 'px';
+    board.appendChild(el);
+    puzPlaced++;
+    document.getElementById('puz-count').textContent =
+      `${puzPlaced} de ${PUZ_PATHS.length} piezas`;
+    if (puzPlaced === PUZ_PATHS.length) {
+      document.getElementById('puz-win').style.display = 'block';
+    }
+  } else {
+    // vuelve a la bandeja
+    el.classList.remove('dragging');
+    el.style.left = ''; el.style.top = '';
+    el.style.width = ''; el.style.height = '';
+    document.getElementById('puz-tray').appendChild(el);
+  }
+  drag = null;
+}
+
+document.addEventListener('mousemove', moveDrag);
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchmove', moveDrag, {passive:false});
+document.addEventListener('touchend', endDrag);
+
+/* ══════════════════════════════════════════════
+   JUEGO 4 · GLOSARIO ROMANÍ  (solo palabras, sin audio)
+   ⚠️ Solo deben usarse palabras del glosario oficial del
+   proyecto (Canva). Para agregar o quitar palabras edita GLOS_QS.
+   ══════════════════════════════════════════════ */
+
+const GLOS_QS = [
+  {
+    palabra: 'Paparuga',
+    correcta: 'mariposa',
+    opts: ['mariposa', 'estrella', 'sol', 'agua'],
+    nota: 'Paparuga significa mariposa. Da nombre a este proyecto: símbolo de transformación y resistencia.'
+  },
+  {
+    palabra: 'Kher',
+    correcta: 'casa',
+    opts: ['casa', 'carreta', 'plato', 'espejo'],
+    nota: 'Kher significa casa u hogar. Para muchas familias rromaníes el hogar no es solo un lugar: es la gente que lo habita.'
+  },
+  {
+    palabra: 'Phral',
+    correcta: 'hermano',
+    opts: ['hermano', 'hermana', 'persona', 'familia'],
+    nota: 'Phral significa hermano. Entre los Rrom también se usa para nombrar a quien se considera parte de la comunidad.'
+  },
+  {
+    palabra: 'Pen',
+    correcta: 'hermana',
+    opts: ['hermana', 'hermano', 'familia', 'persona'],
+    nota: 'Pen significa hermana.'
+  },
+  {
+    palabra: 'Manush',
+    correcta: 'persona',
+    opts: ['persona', 'familia', 'hermano', 'casa'],
+    nota: 'Manush significa persona o ser humano. La raíz es la misma que en sánscrito: manusha.'
+  },
+  {
+    palabra: 'Pabay',
+    correcta: 'manzana',
+    opts: ['manzana', 'pera', 'uvas', 'limon'],
+    nota: 'Pabay significa manzana.'
+  },
+  {
+    palabra: 'Parno',
+    correcta: 'color-blanco',
+    opts: ['color-blanco', 'color-rojo', 'color-verde', 'color-amarillo'],
+    nota: 'Parno significa blanco.'
+  }
+];
+
+const GLOS_LBL = {
+  mariposa:'Mariposa', estrella:'Estrella', sol:'Sol', agua:'Agua',
+  casa:'Casa', carreta:'Carreta', plato:'Plato', espejo:'Espejo',
+  vaso:'Vaso', tela:'Tela',
+  hermano:'Hermano', hermana:'Hermana', persona:'Persona', familia:'Familia',
+  manzana:'Manzana', pera:'Pera', uvas:'Uvas', limon:'Limón',
+  'color-blanco':'Blanco', 'color-rojo':'Rojo', 'color-verde':'Verde',
+  'color-amarillo':'Amarillo', 'color-azul':'Azul', 'color-negro':'Negro'
+};
+
+let glosIdx = 0, glosScore = 0, glosDone = [];
+
+function initGlos() {
+  glosIdx = 0; glosScore = 0; glosDone = [];
+  document.getElementById('glos-final').style.display = 'none';
+  document.getElementById('glos-card').style.display = 'block';
+  renderGlos();
+}
+
+function renderGlos() {
+  const q = GLOS_QS[glosIdx];
+  document.getElementById('glos-prog').textContent =
+    `Palabra ${glosIdx + 1} de ${GLOS_QS.length}`;
+  document.getElementById('glos-word').textContent = q.palabra;
+  document.getElementById('glos-note').style.display = 'none';
+  document.getElementById('glos-next').style.display = 'none';
+
+  // barajar opciones para que la correcta no quede siempre igual
+  const opts = [...q.opts].sort(() => Math.random() - 0.5);
+  document.getElementById('glos-opts').innerHTML = opts.map(o =>
+    `<div class="glos-opt" id="go-${o}" onclick="answerGlos('${o}')">
+       <img src="${o}.svg" alt="${GLOS_LBL[o] || o}">
+       <span>${GLOS_LBL[o] || o}</span>
+     </div>`).join('');
+
+}
+
+function answerGlos(pick) {
+  const q = GLOS_QS[glosIdx];
+  if (glosDone[glosIdx] !== undefined) return;
+  glosDone[glosIdx] = pick;
+  document.querySelectorAll('.glos-opt').forEach(el => el.style.pointerEvents = 'none');
+  const ok = pick === q.correcta;
+  if (ok) glosScore++;
+  document.getElementById('go-' + pick).classList.add(ok ? 'ok' : 'bad');
+  if (!ok) document.getElementById('go-' + q.correcta).classList.add('ok');
+  const n = document.getElementById('glos-note');
+  n.innerHTML = (ok ? '✅ ¡Correcto! ' : '💡 ') + q.nota;
+  n.style.display = 'block';
+  const nx = document.getElementById('glos-next');
+  nx.style.display = 'inline-block';
+  nx.textContent = glosIdx < GLOS_QS.length - 1 ? 'Siguiente palabra →' : 'Ver resultado →';
+}
+
+function nextGlos() {
+  if (glosIdx < GLOS_QS.length - 1) { glosIdx++; renderGlos(); }
+  else {
+    document.getElementById('glos-card').style.display = 'none';
+    const f = document.getElementById('glos-final');
+    f.style.display = 'block';
+    document.getElementById('glos-score').textContent =
+      `Acertaste ${glosScore} de ${GLOS_QS.length} palabras`;
+    document.getElementById('glos-msg').textContent = glosScore === GLOS_QS.length
+      ? '🎉 ¡Perfecto! Conoces muy bien la shib romaní.'
+      : glosScore >= GLOS_QS.length / 2
+        ? '👏 ¡Muy bien! Cada palabra que aprendes mantiene viva una lengua.'
+        : '🌱 ¡Sigue explorando! Aprender una lengua toma tiempo.';
+  }
+}
+
+/* ══════════════════════════════════════════════
+   AUDIOS  ·  en la misma carpeta que index.html
+   El navegador prueba cada nombre y formato hasta encontrar el archivo.
+   ══════════════════════════════════════════════ */
+const AUDIO_DIR = '';   // los audios están junto a index.html
+const AUDIO_EXT = ['mp3','m4a','wav','ogg'];
+function audioTag(id, bases) {
+  const srcs = bases.flatMap(b => AUDIO_EXT.map(e => `<source src="${AUDIO_DIR}${encodeURI(b)}.${e}">`)).join('');
+  return `<audio class="audio-player" controls preload="metadata" id="${id}">${srcs}</audio>
+    <div class="audio-missing" id="${id}-miss" style="display:none">🔇 <strong>Audio no encontrado.</strong> Revisa que el archivo esté en la misma carpeta que index.html con el nombre <code>${bases[0]}.mp3</code>.</div>`;
+}
+function watchAudio(id) {
+  const au = document.getElementById(id); if (!au) return;
+  const last = au.querySelector('source:last-of-type');
+  if (last) last.addEventListener('error', () => {
+    au.style.display = 'none';
+    document.getElementById(id + '-miss').style.display = 'block';
+  });
+}
+
+/* RELATOS · ECOS DE LA MEMORIA  (el archivo de audio se llama como el código; el código no se muestra como título) */
+const ECOS = [
+  { n:1, t:'Identidad y escuela',   c:'1582', m:'Carol Julieth Romero Muñoz' },
+  { n:2, t:'Nuestra lengua',        c:'1594', m:'Carol Julieth Romero Muñoz' },
+  { n:3, t:'Ser gitano',            c:'1595', m:'Carol Julieth Romero Muñoz' },
+  { n:4, t:'Raíces y territorio',   c:'1596', m:'Dana Valentina Quiroga Santamaria' },
+  { n:5, t:'Caminos de vida',       c:'1600', m:'Dana Valentina Quiroga Santamaria' },
+  { n:6, t:'Nuestro modo de vida',  c:'1601', m:'Dana Valentina Quiroga Santamaria' }
+];
+document.getElementById('eco-list').innerHTML = ECOS.map(e => `
+  <div class="eco-card">
+    <div class="eco-head"><div class="testimony-num">${e.n}</div><div>Audio ${e.n}: ${e.t}</div></div>
+    <div class="eco-body">
+      ${audioTag('eco-' + e.n, [e.c, 'Entrevista ' + e.c])}
+      <p class="eco-ref"><strong>Fuente:</strong> Comisión para el Esclarecimiento de la Verdad, la Convivencia y la No Repetición (2022), <em>Cuando los pájaros no cantaban: historias del conflicto armado en Colombia</em>, testimonio Entrevista ${e.c}.<br><strong>Mediación sonora:</strong> ${e.m} (2026).</p>
+    </div>
+  </div>`).join('');
+ECOS.forEach(e => watchAudio('eco-' + e.n));
+
+/* CULTURA · SHIB ROMANÍ  ⚠️ Reemplazar por las palabras del glosario oficial (Canva/PDF) */
+const SHIB = [
+  ['Paparuga','Mariposa'],['Rrom','Gitano / Hombre'],['Rromaní','Gitana / Mujer'],['Shib','Lengua'],
+  ['Dévla','Dios'],['Chavales','Niños'],['Phral','Hermano'],['Pen','Hermana'],
+  ['Kher','Casa / Hogar'],['Baxt','Suerte / Destino'],['Gelem','Fui / Caminé'],['Manush','Persona']
+];
+document.getElementById('shib-grid').innerHTML = SHIB.map(([r,e]) =>
+  `<div class="glos-item"><div class="glos-rom">${r}</div><div class="glos-es">${e}</div></div>`).join('');
+
+/* ══════════════════════════════════════════════
+   JUEGO 5 · SONIDOS ROMANÍ
+   files = nombres posibles del archivo dentro de audios/
+   ══════════════════════════════════════════════ */
+const soundsQs = [
+  { files:['tambor','se escucha mas el tambor'],
+    q:'¿Qué instrumento escuchaste con más fuerza?',
+    opts:['🎻 Violín','🥁 Tambor','🎸 Guitarra'], correct:1,
+    note:'En esta grabación el tambor es el instrumento que se escucha con más fuerza y marca el ritmo. Escuchar con atención ayuda a reconocer cada instrumento.' },
+  { files:['historia','Una historia del pueblo'],
+    q:'¿Qué crees que cuenta esta canción?',
+    opts:['😄 Una fiesta','📖 Una historia del pueblo','🗺️ Un viaje'], correct:1,
+    note:'Muchas canciones romaníes narran la memoria del pueblo: los caminos recorridos, las familias, las pérdidas y la resistencia.' },
+  { files:['alegre'],
+    q:'¿Qué emoción transmite esta música?',
+    opts:['😊 Alegre','😌 Tranquilo','🤔 Curioso','😢 Nostálgico'], correct:0,
+    note:'Esta música transmite alegría. Aun así, lo que tú sientes al escucharla también cuenta.' }
+];
+let soundAnswers = [];
+function initSounds() {
+  soundAnswers = [];
+  document.getElementById('sounds-result').style.display = 'none';
+  document.getElementById('sounds-body').innerHTML = soundsQs.map((q, qi) => `
+    <div class="audio-block">
+      ${audioTag('au-' + qi, q.files)}
+      <div class="q-text">${q.q}</div>
+      ${q.opts.map((o, oi) => `<div class="q-opt" id="sq-${qi}-${oi}" onclick="answerSound(${qi},${oi})">${o}</div>`).join('')}
+      <div class="q-note" id="sn-${qi}">💡 ${q.note}</div>
+    </div>`).join('');
+  soundsQs.forEach((q, qi) => watchAudio('au-' + qi));
+}
+function answerSound(qi, oi) {
+  const q = soundsQs[qi];
+  for (let i = 0; i < q.opts.length; i++) {
+    const el = document.getElementById(`sq-${qi}-${i}`);
+    if (!el) continue;
+    el.style.pointerEvents = 'none';
+    if (q.correct === -1) { if (i === oi) el.classList.add('correct'); }
+    else if (i === q.correct) el.classList.add('correct');
+    else if (i === oi) el.classList.add('wrong');
+  }
+  document.getElementById(`sn-${qi}`).style.display = 'block';
+  soundAnswers[qi] = oi;
+  if (soundAnswers.filter(a => a !== undefined).length === soundsQs.length) {
+    const r = document.getElementById('sounds-result');
+    r.style.display = 'block';
+    r.textContent = '🎉 ¡Completaste el recorrido sonoro! Gracias por escuchar.';
+  }
+}
+
+/* ══════════════════════════════════════════════
+   SCROLL REVEAL
+   ══════════════════════════════════════════════ */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, {threshold:0.08});
+document.querySelectorAll('.c-card,.game-card,.card,.person-card,.testimony-card,.legal-item').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(25px)';
+  el.style.transition='opacity .6s ease, transform .6s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200"><rect width="200" height="200" fill="#FDF8F0"/>
+  <path d="M36 52 Q68 40 100 52 Q132 64 164 52 L164 148 Q132 160 100 148 Q68 136 36 148 Z" fill="#F9D648" stroke="#C9A227" stroke-width="3"/>
+  <path d="M36 76 Q68 64 100 76 Q132 88 164 76 M36 100 Q68 88 100 100 Q132 112 164 100 M36 124 Q68 112 100 124 Q132 136 164 124" stroke="#fff" stroke-width="3" fill="none" opacity=".8"/></svg>
